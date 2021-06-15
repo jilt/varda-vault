@@ -1,4 +1,4 @@
-const CONTRACT_NAME = process.env.CONTRACT_NAME || 'wallet-example'; /* TODO: fill this in! */
+const CONTRACT_NAME = process.env.CONTRACT_NAME || 'jilt.testnet'; /* TODO: fill this in! */
 
 function getConfig (env) {
   switch (env) {
