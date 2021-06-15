@@ -13,9 +13,9 @@ Once the content is uploaded copy the file url from pinata, login to the [Varda 
 Editing link once saved is possible but you'll need to pay a 1 near fee, please contact jilt (at) jeeltcraft (dot) com if needed.
 
 
-### redeem secret content
+### Redeem secret content
 
 Secret content is available only to the NFT token owner.
 Access the [Varda Vault](www.varda.vision/vault/index.html) and click the button "redeem secret content". Add the link to your owned NFT in the form and follow the steps to get the URL to your exclusive file.
 
-### kindly brought you by the Varda Team
+### Kindly brought you by the Varda Team
