@@ -17281,7 +17281,7 @@ function signedInFlow() {
     return el.style.display = '';
   }); // Displaying current account name.
 
-  document.getElementById('account-id').innerText = window.accountId; // Adding an event to a say-hi button.
+  document.getElementById('account-id').innerText = window.accountId.replace('testnet', 'near'); // Adding an event to a say-hi button.
 
   document.getElementById('say-hi').addEventListener('click', function () {
     // We call say Hi and then update who said Hi last.
@@ -17307,7 +17307,8 @@ function updateWhoSaidHi() {
   // usin `.then()`.
   contract.whoSaidHi().then(function (who) {
     var el = document.getElementById('who');
-    el.innerText = who || 'No one'; // only link to profile if there's a profile to link to
+    var vardel = who.replace('testnet', 'near');
+    el.innerText = vardel || 'No one'; // only link to profile if there's a profile to link to
 
     if (who) {
       el.href = 'https://explorer.nearprotocol.com/accounts/' + who;
@@ -17349,7 +17350,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "46391" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "37681" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
