@@ -93,10 +93,15 @@ footer {
 /*Fun begins*/
 
 .tab_container {
-	width: 90%;
+	width: 100%;
 	margin: 0 auto;
 	padding-top: 70px;
 	position: relative;
+}
+
+section.tab-content {
+  max-height:300px;
+  overflow-y:auto;
 }
 
 input, section {
@@ -110,25 +115,23 @@ label {
   font-size: 18px;
   display: block;
   float: left;
-  width: 20%;
+  width: 33.33%;
+  min-height:102px;
   padding: 1.5em;
   color: #757575;
   cursor: pointer;
   text-decoration: none;
   text-align: center;
-  background: #f0f0f0;
 }
 
 #tab1:checked ~ #content1,
 #tab2:checked ~ #content2,
-#tab3:checked ~ #content3,
-#tab4:checked ~ #content4,
-#tab5:checked ~ #content5 {
+#tab3:checked ~ #content3 {
   display: block;
   padding: 20px;
-  background: #fff;
+
   color: #999;
-  border-bottom: 2px solid #f0f0f0;
+
 }
 
 .tab_container .tab-content p,
@@ -142,12 +145,11 @@ label {
 }
 
 .tab_container [id^="tab"]:checked + label {
-  background: #fff;
-  box-shadow: inset 0 3px #0CE;
+  box-shadow: inset 0 3px var(--primary);
 }
 
 .tab_container [id^="tab"]:checked + label .fa {
-  color: #0CE;
+  color: var(--primary);
 }
 
 label .fa {
@@ -182,7 +184,7 @@ label .fa {
 
 .no_wrap {
   text-align:center;
-  color: #0ce;
+  color: var(--primary)
 }
 .link {
   text-align:center;
@@ -192,6 +194,9 @@ label .fa {
 
 .target > ul, .target1 > ul {
 	list-style:none;
+}
+#say-hi {
+  width:90%;
 }
 
 /*# sourceMappingURL=/styles.8986bff4.css.map */
