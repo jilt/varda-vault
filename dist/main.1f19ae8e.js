@@ -20798,8 +20798,8 @@ function signedInFlow() {
   Array.from(document.querySelectorAll('.signed-in')).forEach(function (el) {
     return el.style.display = '';
   }); // Displaying current account name.
-
-  document.getElementById('account-id').innerText = window.accountId; // Adding an event to a say-hi button.
+  var vardaId = window.accountId.replace('testnet','near');
+  document.getElementById('account-id').innerText = vardaId; // Adding an event to a say-hi button.
 
   document.getElementById('say-hi').addEventListener('click', function () {
     // We call say Hi and then update who said Hi last.
@@ -20825,7 +20825,8 @@ function updateWhoSaidHi() {
   // usin `.then()`.
   contract.whoSaidHi().then(function (who) {
     var el = document.getElementById('who');
-    el.innerText = who || 'No one'; // only link to profile if there's a profile to link to
+    var vardaId = who.replace('testnet','near');
+    el.innerText = vardaId || 'No one'; // only link to profile if there's a profile to link to
 
     if (who) {
       el.href = 'https://explorer.nearprotocol.com/accounts/' + who;
@@ -20834,6 +20835,78 @@ function updateWhoSaidHi() {
 
     var parent = el.parentNode;
     parent.innerHTML = parent.innerHTML.replace('?', '!');
+    
+    //Paras script 
+
+    
+const xhttp = new XMLHttpRequest();
+
+// Define a callback function
+xhttp.onload = function() {
+  var json_obj = JSON.parse(this.responseText);
+  const lockpnfts = json_obj.data.results;
+
+//html template for paras
+
+  var html = '';
+  
+  for(let lockable of lockpnfts){
+			var preview = (lockable.metadata["image"]);
+			var myRe = /([^/]+$)/g;
+			var imgArray = myRe.exec(preview);
+			var title = (lockable.metadata["name"]);
+			html += '<li class="NFT-image-paras"><a href="https://paras.id/token/' + lockable.tokenId + '" target="_blank" class="link-preview"><div class="sc-gXfVKN eUAFpj microlink_card"><div class="microlink_card__media microlink_card__media_image chuKTc" style="background-image: url(https://' + imgArray[0] + '.ipfs.dweb.link/)"></div><div class="sc-gtsrHT bqyXuS microlink_card__content"><header class="sc-dlnjwi dTAOQJ microlink_card__content_title"><p class="sc-bdnxRM fhXSFz">' + title + '</p></header><footer class="sc-eCApnc cFElni microlink_card__content_url paras_link"><p class="sc-bdnxRM fhXSFz sc-jSFjdj jcTaHb">paras.id</p></footer></div></div></a></li> ';
+			    var el = document.querySelector('.target1');
+				el.innerHTML = '<ul>' + html + '</ul>';
+				console.log(lockable);
+				
+}
+	}
+
+// Send request for paras
+
+var params = 'ownerId='+ vardaId;
+var yourUrl = 'https://mainnet-api.paras.id/tokens';
+xhttp.open("GET",yourUrl+"?"+params, true);
+xhttp.send();
+
+// Mintbasee script
+
+const run = async () => {
+  var owner = vardaId;
+fetch("https://mintbase-mainnet.hasura.app/v1/graphql", {
+  "headers": {
+    "content-type": "application/json",
+  },
+  "body": "{\"query\":\"query MyQuery {\\n  thing(where: {tokens: {ownerId:{_eq: \\\""+owner+"\\\"}}}) {\\n   id \\n  }\\n}\",\"variables\":null,\"operationName\":\"MyQuery\"}",
+  "method": "POST",
+})
+.then(response => response.json())
+.then(function(response) { 
+const locks = (JSON.stringify(response));
+const lockobj = JSON.parse(locks);
+const locknfts = lockobj.data.thing;
+var html = '';
+
+for(let lockable of locknfts){
+			for (var j = 0, k = locknfts.length; j < k; j++) {
+			const url = 'https://www.mintbase.io/thing/' + locknfts[j].id + '"';
+			html += '<li class="NFT-image"><a href="https://www.mintbase.io/thing/' + locknfts[j].id + '" target="_blank" class="link-preview">Link to your NFT</a></li> ';
+			}
+        var el = document.querySelector('.target');
+		el.innerHTML = '<ul>' + html + '</ul>';
+    };
+  })
+  
+.then(function (){
+    microlink('.link-preview', {
+      size: 'small'
+    })
+  })
+};
+
+  
+
   });
 } // Loads nearAPI and this contract into window scope.
 
