@@ -17,13 +17,15 @@
   "devDependencies": {
     "jest": "^27.0.4",
     "jest-environment-node": "^27.0.3",
-    "near-sdk-as": "^3.2.0",
     "near-cli": "^2.0.2",
+    "near-sdk-as": "^3.2.0",
     "parcel-bundler": "^1.12.5"
   },
   "dependencies": {
+    "@microlink/react": "^5.5.6",
     "near-api-js": "^0.41.0",
-    "regenerator-runtime": "^0.13.7"
+    "regenerator-runtime": "^0.13.7",
+    "styled-components": "^5.3.0"
   },
   "jest": {
     "testPathIgnorePatterns": [

@@ -18395,7 +18395,7 @@ class Account {
             finality: 'optimistic'
         });
     }
-    /** @hidden 
+    /** @hidden */
     printLogsAndFailures(contractId, results) {
         for (const result of results) {
             console.log(`Receipt${result.receiptIds.length > 1 ? 's' : ''}: ${result.receiptIds.join(', ')}`);
@@ -18404,7 +18404,7 @@ class Account {
                 console.warn(`\tFailure [${contractId}]: ${result.failure}`);
             }
         }
-    }*/
+    }
     /** @hidden */
     printLogs(contractId, logs, prefix = '') {
         for (const log of logs) {
@@ -20612,7 +20612,7 @@ __exportStar(require("./browser-connect"), exports);
 require("error-polyfill");
 
 },{"./key_stores/browser-index":"../node_modules/near-api-js/lib/key_stores/browser-index.js","./common-index":"../node_modules/near-api-js/lib/common-index.js","./browser-connect":"../node_modules/near-api-js/lib/browser-connect.js","error-polyfill":"../node_modules/error-polyfill/index.js"}],"config.js":[function(require,module,exports) {
-var CONTRACT_NAME = "dev-1625499398308-90419582143567" || 'jilt.testnet';
+var CONTRACT_NAME = "dev-1625568828917-55558864085140" || 'jilt.testnet';
 /* TODO: fill this in! */
 
 function getConfig(env) {
@@ -20689,9 +20689,9 @@ var _config = _interopRequireDefault(require("./config"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
+function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function (nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 
@@ -20798,9 +20798,8 @@ function signedInFlow() {
   Array.from(document.querySelectorAll('.signed-in')).forEach(function (el) {
     return el.style.display = '';
   }); // Displaying current account name.
-  var vardaId = accountId.replace('testnet', 'near');
-  // document.getElementById('account-id').innerText = window.accountId; // Adding an event to a say-hi button.
-  document.getElementById('account-id').innerText = vardaId;
+
+  document.getElementById('account-id').innerText = window.accountId; // Adding an event to a say-hi button.
 
   document.getElementById('say-hi').addEventListener('click', function () {
     // We call say Hi and then update who said Hi last.
@@ -20826,7 +20825,7 @@ function updateWhoSaidHi() {
   // usin `.then()`.
   contract.whoSaidHi().then(function (who) {
     var el = document.getElementById('who');
-    el.innerText = who.replace('testnet', 'near') || 'No one'; // only link to profile if there's a profile to link to
+    el.innerText = who || 'No one'; // only link to profile if there's a profile to link to
 
     if (who) {
       el.href = 'https://explorer.nearprotocol.com/accounts/' + who;
@@ -20835,82 +20834,6 @@ function updateWhoSaidHi() {
 
     var parent = el.parentNode;
     parent.innerHTML = parent.innerHTML.replace('?', '!');
-
-    // NFT displaying functions 
-    var vardaId = accountId.replace('testnet', 'near');
-
-    //Paras 
-
-    const xhttp = new XMLHttpRequest();
-
-// Define a callback function
-xhttp.onload = function() {
-  var json_obj = JSON.parse(this.responseText);
-  const lockpnfts = json_obj.data.results;
-
-//html template
-
-  var html = '';
-  
-  for(let lockable of lockpnfts){
-			var preview = (lockable.metadata["image"]);
-			var myRe = /([^/]+$)/g;
-			var imgArray = myRe.exec(preview);
-			var title = (lockable.metadata["name"]);
-			html += '<li class="NFT-image-paras"><a href="https://paras.id/token/' + lockable.tokenId + '" target="_blank" class="link-preview"><div class="sc-gXfVKN eUAFpj microlink_card"><div class="microlink_card__media microlink_card__media_image chuKTc" style="background-image: url(https://' + imgArray[0] + '.ipfs.dweb.link/)"></div><div class="sc-gtsrHT bqyXuS microlink_card__content"><header class="sc-dlnjwi dTAOQJ microlink_card__content_title"><p class="sc-bdnxRM fhXSFz">' + title + '</p></header><footer class="sc-eCApnc cFElni microlink_card__content_url paras_link"><p class="sc-bdnxRM fhXSFz sc-jSFjdj jcTaHb">paras.id</p></footer></div></div></a></li> ';
-			    var el = document.querySelector('.target1');
-				el.innerHTML = '<ul>' + html + '</ul>';
-				
-}
-	}
-
-// Send a request
-
-var params = 'ownerId='+ vardaId;
-var yourUrl = 'https://mainnet-api.paras.id/tokens';
-xhttp.open("GET",yourUrl+"?"+params, true);
-xhttp.send();
-
-  // mintbase and microlink
-
-
-const run = async () => {
-  var vardaId = accountId.replace('testnet', 'near');
-  var owner = vardaId;
-fetch("https://mintbase-mainnet.hasura.app/v1/graphql", {
-  "headers": {
-    "content-type": "application/json",
-  },
-  "body": "{\"query\":\"query MyQuery {\\n  thing(where: {tokens: {ownerId:{_eq: \\\""+owner+"\\\"}}}) {\\n   id \\n  }\\n}\",\"variables\":null,\"operationName\":\"MyQuery\"}",
-  "method": "POST",
-})
-.then(response => response.json())
-.then(function(response) { 
-const locks = (JSON.stringify(response));
-const lockobj = JSON.parse(locks);
-const locknfts = lockobj.data.thing;
-var html = '';
-
-for(let lockable of locknfts){
-			for (var j = 0, k = locknfts.length; j < k; j++) {
-			const url = 'https://www.mintbase.io/thing/' + locknfts[j].id + '"';
-			html += '<li class="NFT-image"><a href="https://www.mintbase.io/thing/' + locknfts[j].id + '" target="_blank" class="link-preview">Link to your NFT</a></li> ';
-			}
-        var el = document.querySelector('.target');
-		el.innerHTML = '<ul>' + html + '</ul>';
-    };
-  })
-  
-.then(function (){
-    microlink('.link-preview', {
-      size: 'small'
-    })
-  })
-};
-
-
-
-
   });
 } // Loads nearAPI and this contract into window scope.
 
@@ -20944,7 +20867,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "39377" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "42147" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
