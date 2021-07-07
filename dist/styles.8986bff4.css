@@ -199,4 +199,102 @@ label .fa {
   width:90%;
 }
 
+/* NFT links */
+
+.eUAFpj {
+  max-width: var(--microlink-max-width,700px);
+  border:none;
+  color: #757575;
+  overflow: hidden;
+  font-family: InterUI, -apple-system, BlinkMacSystemFont, "Helvetica Neue", "Segoe UI", Oxygen, Ubuntu, Cantarell, "Open Sans", sans-serif;
+  display: flex;
+  text-decoration: none;
+  opacity: 1;
+  position: relative;
+  transition-duration: 150ms;
+  transition-timing-function: cubic-bezier(0.25, 0.8, 0.25, 1);
+  transition-property: background, border-color;
+  will-change: background, border-color;
+  margin-bottom:1em;
+}
+.eUAFpj:hover{
+  background: rgba(255, 255, 255, .1);
+}
+.chuKTc {
+  background: center center / cover no-repeat transparent;
+  display: block;
+  overflow: hidden;
+  height: auto;
+  position: relative;
+  flex: 0 0 48px;
+}
+.chuKTc::before {
+  content: "";
+  padding-bottom: 100%;
+  display: block;
+}
+.chuKTc::after {
+  content: "";
+  position: absolute;
+  inset: 0px;
+  background: rgb(225, 232, 237);
+  z-index: 1;
+  transition: opacity 150ms cubic-bezier(0.25, 0.8, 0.25, 1) 0s, visibility 150ms cubic-bezier(0.25, 0.8, 0.25, 1) 0s;
+  will-change: opacity;
+  opacity: 0;
+  visibility: hidden;
+}
+.bqyXuS {
+  display: flex;
+  padding: 10px 15px;
+  min-width: 0px;
+  box-sizing: border-box;
+  flex: 1 1 0%;
+  -webkit-box-pack: justify;
+  justify-content: space-between;
+  flex-direction: row;
+  -webkit-box-align: center;
+  align-items: center;
+}
+.dTAOQJ {
+  text-align: left;
+  font-weight: bold;
+  margin: 0px;
+  width: 100%;
+  -webkit-box-flex: 0.8;
+  flex-grow: 0.8;
+  font-size: 15px;
+  min-width: 0px;
+  padding-right: 14px;
+}
+.fhXSFz {
+  text-align: inherit;
+  font-weight: inherit;
+  font-family: inherit;
+  color: inherit;
+  margin: 0px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.cFElni {
+  display: flex;
+  -webkit-box-align: center;
+  align-items: center;
+  -webkit-box-pack: justify;
+  justify-content: space-between;
+  text-align: left;
+  margin: 0px;
+  -webkit-box-flex: 0;
+  flex-grow: 0;
+  font-weight: normal;
+  font-size: 10px;
+}
+.jcTaHb {
+  opacity: 0.75;
+  transition: opacity 150ms cubic-bezier(0.25, 0.8, 0.25, 1) 0s;
+  will-change: opacity;
+}
+
+
 /*# sourceMappingURL=/styles.8986bff4.css.map */
