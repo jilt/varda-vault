@@ -3,8 +3,6 @@ import "regenerator-runtime/runtime";
 import * as nearAPI from "near-api-js"
 import getConfig from "./config"
 
-import google from "googleapis"
-
 window.nearConfig = getConfig(process.env.NODE_ENV || "development");
 
 // Initializing contract
