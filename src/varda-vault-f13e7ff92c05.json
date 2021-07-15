@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "varda-vault",
+  "private_key_id": "f13e7ff92c052eb9074bd17ec77c683bd9afc995",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvwIBADANBgkqhkiG9w0BAQEFAASCBKkwggSlAgEAAoIBAQDR8KqMIzmGezDA\nQRcV58xWBATdhnwdWy16780tgyAXJFEZQAgWXNzaIchu2rOEEkJ11rf5YgYr9d1U\nwHUfensDEXzSyQ9Qya3r0x6XuZugoZOsG+97EcCcgMIexe++BZ/GQWCaJNYZvATL\nN2pXWZY3pkDTHDRYsUFqCt/B6r30Bu1mi2YSZRmrzf5KlPZclKeQ9+eYk7fRTNMy\ntkiveAJfKd0KbDe5u4smvkn51JBq5uh/Tgzv3rFSpZcjsgRILY1/WKgQqRj7jkpX\nvsFleZxfqUR1raXe3olN3BAquLGa54aFlAM/Tv0KR80VJ5cXCLkN7/yHhIuFJiWl\nptaQqDTfAgMBAAECggEACo7GCBdUmXaKhH1n5TPrniVd/t7FHejSIbOVJ7iUNyjq\n/ZBI/ju1s5aTvaQ4xBry+RNPDzbzXoFjAkcaqY//enw5QPrX6IhfIbpTq7re07Ys\ndsq02wVduieGtThF258gYnHMcBQLXFUmdiqXdqsZSqHzjDchfsnzPM6Tloa9yyhf\nf8L9RvopI51ftFbh9BepBFI7qFvHbrNGP4+gLhEmHPR+8P4pzy66qh/Qb4g01R39\nc7kDdVKGmsNyYBIWyHaoQHSc96bo3sR3HT2znK46PRCShqL51ENYr13gqvEGfXOE\n7x/t88v1/kbX3tKt96D+d91Jctfnc+PDWRezDucDsQKBgQDuvnuwiNBVIN9TMVQc\nJNKrJVOvL2Xej9ia1gnoQz/v5VA9VJ6WK7iAyZl4O3GXnPYwxidgd6EAuMm4ujoI\n3tSsXmNeJ/247UbXlYhEdnIETT69m+zbWkixY5ySRXlqxzNoQDSyuNhV0C5tuX91\nVSkPbAW8oZRnATur0mdfHpPQ2QKBgQDhHTgI5oIR+H3IR6w1AX5Cw5ip/MINcmVv\nVlxEg8qBgvPuurw3XLluryl/mWUKcUnMHKGyPPYAeYLbww24EkFZv6hrjW1Fy7eK\nvH6ovlsNzdAkNADKNEWMJHXUjD2IyETnpZM955Q7hTkhRnyOohecpAgBeABGpWB9\n5BmAyC8gdwKBgQDryxfwj/9qxG+tA8A1l6y1ucT/9ckf2mQs8I6SZbEFJy9rk2KZ\noI62K+Y2WEdlXXHNVDfZz+0lAFzC5LKixim4H/T2LnsppLdd/uK5813Cn+QCcrip\nIG9BO8eMs68qZZmBMkCZ73RCtLzWQ+n9oWFPSPoVhmRCo3YiykisKlAFaQKBgQCo\nmXWqVNn+E5pBMkzrth6WamAgkEnWQGNwK8IXHo3Ayg9gMUNeQ3guScpO4tgmJgsb\ncCY6lCW63UcAyOmxfxqq2TyOsPGyYI0qv1otj8QqZocJVllxGA0ulPAbLJ25oCTb\nScsphhQjL/hFz8DiIsyEaOYGE5ZBUwMdxoTDSyrgqQKBgQDtW3SeuImDyqU5VYez\nrhU828trbboC4fsP68KwAMBEAjoLaTmsGw4qMQwqUOQLuva/ivcH21bisn9h6qD3\nEOpODj036c+8N9cMe8r3ceGPS842RJovZU79tUXQxNt9yGLo1p/Zp7OGBniOfn1t\n/FcPeLv+UL2Q0kO5Ujqt0cx4zA==\n-----END PRIVATE KEY-----\n",
+  "client_email": "varda-vault@varda-vault.iam.gserviceaccount.com",
+  "client_id": "112423335899078238609",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/varda-vault%40varda-vault.iam.gserviceaccount.com"
+}
