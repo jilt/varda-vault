@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang=en >
 
@@ -17,6 +18,9 @@ footer > span {
 	visibility: hidden;
 }
 
+.nft-image {
+	width: 2em;
+}
 <!-- UI styles -->
 
 @import url('https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css');
@@ -173,13 +177,7 @@ label .fa {
 <script src="https://cdn.jsdelivr.net/npm/@microlink/mql@latest/dist/mql.min.js"></script>
 <!-- Microlink SDK -->
 <script src="https://cdn.jsdelivr.net/npm/@microlink/vanilla@latest/dist/microlink.min.js"></script>
-  
-  
-  <script type=text/javasccript>
-  if (document.location.search.match(/type=embed/gi)) {
-    window.parent.postMessage(resize, *);
-  }
-</script>
+<script> var exports = {}; </script>
 
 </head>
 
@@ -242,7 +240,7 @@ xhttp.onload = function() {
 			html += '<li class="NFT-image-paras"><a href="https://paras.id/token/' + lockable.tokenId + '" target="_blank" class="link-preview"><div class="sc-gXfVKN eUAFpj microlink_card"><div class="microlink_card__media microlink_card__media_image chuKTc" style="background-image: url(https://' + imgArray[0] + '.ipfs.dweb.link/)"></div><div class="sc-gtsrHT bqyXuS microlink_card__content"><header class="sc-dlnjwi dTAOQJ microlink_card__content_title"><p class="sc-bdnxRM fhXSFz">' + title + '</p></header><footer class="sc-eCApnc cFElni microlink_card__content_url paras_link"><p class="sc-bdnxRM fhXSFz sc-jSFjdj jcTaHb">paras.id</p></footer></div></div></a></li> ';
 			    var el = document.querySelector('.target1');
 				el.innerHTML = '<ul>' + html + '</ul>';
-				console.log(lockable);
+				//console.log(lockable);
 				
 }
 	}
@@ -266,7 +264,8 @@ fetch("https://mintbase-mainnet.hasura.app/v1/graphql", {
   "headers": {
     "content-type": "application/json",
   },
-  "body": "{\"query\":\"query MyQuery {\\n  thing(where: {tokens: {ownerId:{_eq: \\\""+owner+"\\\"}}}) {\\n   id \\n  }\\n}\",\"variables\":null,\"operationName\":\"MyQuery\"}",
+  
+  "body": "{\"query\":\"query MyQuery {\\n  thing(where: {tokens: {ownerId:{_eq: \\\""+owner+"\\\"}, , _and: {list: {_not: {removedAt: {_is_null: false}}}}}}) {\\n   metadata {\\n  title \\n media \\n} \\n   id \\n  }\\n}\",\"variables\":null,\"operationName\":\"MyQuery\"}",
   "method": "POST",
 })
 .then(response => response.json())
@@ -278,19 +277,16 @@ var html = '';
 
 for(let lockable of locknfts){
 			for (var j = 0, k = locknfts.length; j < k; j++) {
+			let lockimg = locknfts[j].metadata.media;
 			const url = 'https://www.mintbase.io/thing/' + locknfts[j].id + '"';
-			html += '<li class="NFT-image"><a href="https://www.mintbase.io/thing/' + locknfts[j].id + '" target="_blank" class="link-preview">Link to your NFT</a></li> ';
+			html += '<li class="NFT-image"><a href="https://www.mintbase.io/thing/' + locknfts[j].id + '" target="_blank" class="link-preview"><img class="nft-image" src="' + lockimg + '"/>' + locknfts[j].metadata.title + '</a></li> ';
 			}
         var el = document.querySelector('.target');
 		el.innerHTML = '<ul>' + html + '</ul>';
     };
   })
   
-.then(function (){
-    microlink('.link-preview', {
-      size: 'small'
-    })
-  })
+
 };
 
     </script>
