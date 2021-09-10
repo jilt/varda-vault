@@ -4,52 +4,15 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="styles.css">
-<!-- microlink -->
-  
-  <!-- dependencies -->
-  <script src="https://cdn.jsdelivr.net/npm/react@16/umd/react.production.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/react-dom@16/umd/react-dom.production.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/react-is@latest/umd/react-is.production.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/styled-components@5/dist/styled-components.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@microlink/mql@latest/dist/mql.min.js"></script>
-  <!-- Microlink SDK -->
-  <script src="https://cdn.jsdelivr.net/npm/@microlink/vanilla@latest/dist/microlink.min.js"></script>
-
 </head>
 <body>
-  <h1><a id="who" target="_blank">Who</a> wants to unlock NFTs?</h1>
+  <h1><a id="who" target="_blank">Who</a> was the last person to say hi?</h1>
   <button id="sign-in" class="signed-out" style="display: none">
     Sign in with NEAR to find out!
   </button>
-  <!-- NFT display -->
-  <div id="say-hi" class="signed-in" style="display: none">
-
-    <div class="tab_container">
-			<input id="tab1" type="radio" name="tabs" checked>
-			<label for="tab1"><span>Paras.id</span></label>
-
-			<input id="tab2" type="radio" name="tabs">
-			<label for="tab2"><span>Mintbase</span></label>
-
-			<input id="tab3" type="radio" name="tabs">
-			<label for="tab3"><span>Pluminite</span></label>
-
-			<section id="content1" class="tab-content">
-		      	<div class="target1"></div>
-			</section>
-
-			<section id="content2" class="tab-content">
-		      	<div class="target" ><p>Under Construction</p></div>
-			</section>
-
-			<section id="content3" class="tab-content">
-		      	<p>Under Construction</p>
-			</section>
-
-		</div>
-
-  </div>
-  <!-- NFT display-->
+  <button id="say-hi" class="signed-in" style="display: none">
+    Say hi!
+  </button>
   <footer>
     <p class="signed-in" style="display: none">
       Signed in as <a id="account-id" href="https://wallet.nearprotocol.com/profile" target="_blank"></a>

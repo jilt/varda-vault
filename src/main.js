@@ -62,9 +62,7 @@ function signedInFlow() {
   Array.from(document.querySelectorAll('.signed-in')).forEach(el => el.style.display = '');
 
   // Displaying current account name.
-  //document.getElementById('account-id').innerText = window.accountId;
-  var vardaId = window.accountId.replace('testnet','near');
-  document.getElementById('account-id').innerText = vardaId;
+  document.getElementById('account-id').innerText = window.accountId;
 
   // Adding an event to a say-hi button.
   document.getElementById('say-hi').addEventListener('click', () => {
@@ -93,9 +91,7 @@ function updateWhoSaidHi() {
   // usin `.then()`.
   contract.whoSaidHi().then((who) => {
     const el = document.getElementById('who');
-    var vardaId = who.replace('testnet','near');
-    el.innerText = vardaId || 'No one'; // only link to profile if there's a profile to link to
-    //el.innerText = who || 'No one';
+    el.innerText = who || 'No one';
 
     // only link to profile if there's a profile to link to
     if (who) {

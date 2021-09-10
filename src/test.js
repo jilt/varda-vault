@@ -3,15 +3,13 @@ describe('Authorizer', function () {
   let contract;
   let accountId;
 
-  jasmine.DEFAULT_TIMEOUT_INTERVAL = 10000;
-
   // Common setup below
   beforeAll(async function () {
     near = await nearlib.connect(nearConfig);
     accountId = nearConfig.contractName;
     contract = await near.loadContract(accountId, {
       // NOTE: This configuration only needed while NEAR is still in development
-      // View methods are read only. They don't modify the state, but usually return some value. 
+      // View methods are read only. They don't modify the state, but usually return some value.
       viewMethods: ['whoSaidHi'],
       // Change methods can modify the state. But you don't receive the returned value when called.
       changeMethods: ['sayHi'],
