@@ -18,9 +18,29 @@ footer > span {
 	visibility: hidden;
 }
 
-.nft-image {
-	width: 2em;
+.NFT-image {
+	padding:.5em;
 }
+
+.NFT-image:hover {
+	background-color:#ddd;
+}
+
+.nft-image{
+	width: 7em;
+}
+
+.link-preview {
+	padding:1em;
+}
+.link-preview > p {
+	display: inline;
+    margin-left: 2em;
+    position: relative;
+    top: -2em;
+	color: #0ce;
+	font-weight: 600;
+} 
 <!-- UI styles -->
 
 @import url('https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css');
@@ -58,9 +78,7 @@ a {
   text-decoration: none;
   outline: none;
 }
-.NFT-image, .NFT-image-paras {
-	width:30%;
-}
+
 /*Fun begins*/
 
 .tab_container {
@@ -233,11 +251,12 @@ xhttp.onload = function() {
   var html = '';
   
   for(let lockable of lockpnfts){
+			var owner = 'jilt.near';
 			var preview = (lockable.metadata["image"]);
 			var myRe = /([^/]+$)/g;
 			var imgArray = myRe.exec(preview);
 			var title = (lockable.metadata["name"]);
-			html += '<li class="NFT-image-paras"><a href="https://paras.id/token/' + lockable.tokenId + '" target="_blank" class="link-preview"><div class="sc-gXfVKN eUAFpj microlink_card"><div class="microlink_card__media microlink_card__media_image chuKTc" style="background-image: url(https://' + imgArray[0] + '.ipfs.dweb.link/)"></div><div class="sc-gtsrHT bqyXuS microlink_card__content"><header class="sc-dlnjwi dTAOQJ microlink_card__content_title"><p class="sc-bdnxRM fhXSFz">' + title + '</p></header><footer class="sc-eCApnc cFElni microlink_card__content_url paras_link"><p class="sc-bdnxRM fhXSFz sc-jSFjdj jcTaHb">paras.id</p></footer></div></div></a></li> ';
+			html += '<li class="NFT-image"><a href="https://paras.id/' + owner + '/collectibles" target="_blank" class="link-preview"><img class="nft-image" src="https://' + imgArray[0] + '.ipfs.dweb.link" /><p>' + title + '</p></a></li> ';
 			    var el = document.querySelector('.target1');
 				el.innerHTML = '<ul>' + html + '</ul>';
 				//console.log(lockable);
@@ -279,7 +298,7 @@ for(let lockable of locknfts){
 			for (var j = 0, k = locknfts.length; j < k; j++) {
 			let lockimg = locknfts[j].metadata.media;
 			const url = 'https://www.mintbase.io/thing/' + locknfts[j].id + '"';
-			html += '<li class="NFT-image"><a href="https://www.mintbase.io/thing/' + locknfts[j].id + '" target="_blank" class="link-preview"><img class="nft-image" src="' + lockimg + '"/>' + locknfts[j].metadata.title + '</a></li> ';
+			html += '<li class="NFT-image"><a href="https://www.mintbase.io/thing/' + locknfts[j].id + '" target="_blank" class="link-preview"><img class="nft-image" src="' + lockimg + '"/><p>' + locknfts[j].metadata.title + '</p></a></li> ';
 			}
         var el = document.querySelector('.target');
 		el.innerHTML = '<ul>' + html + '</ul>';
