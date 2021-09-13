@@ -2,6 +2,7 @@
 # Developer note: near.gitignore will be renamed to .gitignore upon project creation
 # dependencies
 /node_modules
+/varda-vault/node_modules
 /.pnp
 .pnp.js
 
@@ -11,6 +12,7 @@
 
 # keys
 /neardev
+/varda-vault/neardev
 
 # testing
 /coverage
