@@ -1,0 +1,8 @@
+tasks:
+  - init: yarn install
+github:
+  prebuilds:
+    addBadge: true
+ports:
+  - port: 5000
+    onOpen: open-browser
