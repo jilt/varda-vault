@@ -1,0 +1,95 @@
+{
+  "name": "create-near-app",
+  "version": "2.0.0",
+  "description": "generate new near blank project with different type",
+  "main": "index.js",
+  "files": [
+    "common",
+    "templates",
+    "utils"
+  ],
+  "scripts": {
+    "test": "node ./test/test-new-project.js",
+    "lint": "eslint .",
+    "fix": "eslint . --fix",
+    "release": "release-it"
+  },
+  "repository": "https://github.com/near/create-near-app.git",
+  "author": "Yifang Ma <yifang@near.org>",
+  "license": "(MIT AND Apache-2.0)",
+  "keywords": [
+    "nearprotocol",
+    "near-protocol",
+    "assemblyscript",
+    "rust",
+    "react",
+    "angular",
+    "smart-contract",
+    "blockchain"
+  ],
+  "bugs": "https://github.com/near/create-near-app/issues",
+  "bin": {
+    "create-near-app": "index.js"
+  },
+  "dependencies": {
+    "chalk": "^4.0.0",
+    "cross-spawn": "^7.0.1",
+    "mixpanel": "^0.13.0",
+    "ncp": "^2.0.0",
+    "os": "^0.1.1",
+    "replace-in-files": "^3.0.0",
+    "shelljs": "^0.8.3",
+    "which": "^2.0.2",
+    "yargs": "^17.0.1"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^12.0.0",
+    "@commitlint/config-conventional": "^12.0.0",
+    "@release-it/conventional-changelog": "^2.0.0",
+    "@typescript-eslint/eslint-plugin": "^4.6.1",
+    "@typescript-eslint/parser": "^4.6.1",
+    "babel-eslint": "10.x",
+    "eslint": "7.20.0",
+    "eslint-config-react-app": "^6.0.0",
+    "eslint-plugin-flowtype": "5.7.2",
+    "eslint-plugin-import": "2.x",
+    "eslint-plugin-jsx-a11y": "6.x",
+    "eslint-plugin-react": "7.x",
+    "eslint-plugin-react-hooks": "4.2.0",
+    "eslint-plugin-vue": "^7.0.0",
+    "husky": "^6.0.0",
+    "release-it": "^14.0.1",
+    "typescript": "^4.0.2"
+  },
+  "engines": {
+    "node": ">=12"
+  },
+  "husky": {
+    "hooks": {
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+    }
+  },
+  "commitlint": {
+    "extends": [
+      "@commitlint/config-conventional"
+    ],
+    "rules": {
+      "body-max-line-length": [
+        0
+      ]
+    }
+  },
+  "release-it": {
+    "git": {
+      "commitMessage": "chore: release v${version}"
+    },
+    "github": {
+      "release": true
+    },
+    "plugins": {
+      "@release-it/conventional-changelog": {
+        "preset": "angular"
+      }
+    }
+  }
+}
