@@ -41,19 +41,15 @@ export default function App() {
   if (!window.walletConnection.isSignedIn()) {
     return (
       <main>
-        <h1>Welcome to NEAR!</h1>
+        <h1>Varda Vault</h1>
         <p>
-          To make use of the NEAR blockchain, you need to sign in. The button
-          below will sign you in using NEAR Wallet.
+          To access unlockable content from your NEAR NFTs login below
         </p>
         <p>
-          By default, when your app runs in "development" mode, it connects
-          to a test network ("testnet") wallet. This works just like the main
-          network ("mainnet") wallet, but the NEAR Tokens on testnet aren't
-          convertible to other currencies – they're just for testing!
+          For creators looking to lock content to NFTs please read this <a href="https://github.com/jilt/varda-vault#readme" title="creator guide">How To!</a>
         </p>
         <p>
-          Go ahead and click the button below to try it out:
+          This is a free service brought you by the <a href="https://www.varda.vision">Varda Dev Team</a>.
         </p>
         <p style={{ textAlign: 'center', marginTop: '2.5em' }}>
           <button onClick={login}>Sign in</button>
@@ -82,6 +78,9 @@ export default function App() {
           {' '/* React trims whitespace around tags; insert literal space character when needed */}
           {window.accountId}!
         </h1>
+        <p>
+          These are your NFTs, click on the botton to get the unlockable content for each of them!
+        </p>
         <form onSubmit={async event => {
           event.preventDefault()
 
@@ -152,21 +151,45 @@ export default function App() {
             </div>
           </fieldset>
         </form>
-        <p>
-          Look at that! A Hello World app! This greeting is stored on the NEAR blockchain. Check it out:
-        </p>
-        <ol>
-          <li>
-            Look in <code>src/App.js</code> and <code>src/utils.js</code> – you'll see <code>getGreeting</code> and <code>setGreeting</code> being called on <code>contract</code>. What's this?
-          </li>
-          <li>
-            Ultimately, this <code>contract</code> code is defined in <code>assembly/main.ts</code> – this is the source code for your <a target="_blank" rel="noreferrer" href="https://docs.near.org/docs/develop/contracts/overview">smart contract</a>.</li>
-          <li>
-            When you run <code>yarn dev</code>, the code in <code>assembly/main.ts</code> gets deployed to the NEAR testnet. You can see how this happens by looking in <code>package.json</code> at the <code>scripts</code> section to find the <code>dev</code> command.</li>
-        </ol>
+        
+       
+          <form style={{
+              visibility: 'hidden'
+            }}>
+            <input className="owner" type="textbox" defaultValue="jilt.near"/>
+          </form>
+          <div className="tab_container">
+			      <input id="tab1" type="radio" className="vault" name="tabs" defaultChecked/>
+			      <label htmlFor="tab1" className="tabs"><i className="fa fa-code"></i><span>Mintbase</span></label>
+
+			      <input id="tab2" type="radio" className="vault" name="tabs"/>
+			      <label htmlFor="tab2" className="tabs"><i className="fa fa-pencil-square-o"></i><span>Paras</span></label>
+
+			      <input id="tab3" type="radio" className="vault" name="tabs"/>
+			      <label htmlFor="tab3" className="tabs"><i className="fa fa-bar-chart-o"></i><span>Pluminite</span></label>
+
+			      <section id="content1" className="tab-content">
+				      <h3>Your Mintbase NFTs</h3>
+		      	    <div className="target"></div>
+			      </section>
+
+			      <section id="content2" className="tab-content">
+				      <h3>Your Paras NFTs</h3>
+		      	    <div className="target1" ></div>
+			      </section>
+
+			      <section id="content3" className="tab-content">
+				      <h3>Your Pluminite NFTs</h3>
+		      	    <p>Under Construction</p>
+			      </section>
+
+		      </div>
+
         <hr />
-        <p>
-          To keep learning, check out <a target="_blank" rel="noreferrer" href="https://docs.near.org">the NEAR docs</a> or look through some <a target="_blank" rel="noreferrer" href="https://examples.near.org">example apps</a>.
+        <p style={{
+              textAlign: 'center'
+            }}>
+        Free service brought you by the <a href="https://www.varda.vision">Varda Dev Team</a>.
         </p>
       </main>
       {showNotification && <Notification />}
