@@ -39,6 +39,12 @@ h1 {
   text-align: center;
 }
 
+/* temporary */
+
+#fieldset {
+  display:none;
+}
+
 a,
 .link {
   color: var(--primary);
@@ -244,7 +250,7 @@ footer > span {
 .tab_container {
 	width: 90%;
 	margin: 0 auto;
-	padding-top: 70px;
+	padding-top: 1em;
 	position: relative;
 }
 

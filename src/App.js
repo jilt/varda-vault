@@ -28,6 +28,11 @@ export default function App() {
           .then(greetingFromContract => {
             setGreeting(greetingFromContract)
           })
+        const owner = `${window.accountId}`.replace('testnet','near');
+         
+        // We check NFTs from Paras
+
+        // We check NFTs from Mintbase
       }
     },
 
@@ -40,7 +45,7 @@ export default function App() {
   // if not signed in, return early with sign-in prompt
   if (!window.walletConnection.isSignedIn()) {
     return (
-      <main>
+      <main><run />
         <h1>Varda Vault</h1>
         <p>
           To access unlockable content from your NEAR NFTs login below
@@ -169,17 +174,14 @@ export default function App() {
 			      <label htmlFor="tab3" className="tabs"><i className="fa fa-bar-chart-o"></i><span>Pluminite</span></label>
 
 			      <section id="content1" className="tab-content">
-				      <h3>Your Mintbase NFTs</h3>
 		      	    <div className="target"></div>
 			      </section>
 
 			      <section id="content2" className="tab-content">
-				      <h3>Your Paras NFTs</h3>
 		      	    <div className="target1" ></div>
 			      </section>
 
 			      <section id="content3" className="tab-content">
-				      <h3>Your Pluminite NFTs</h3>
 		      	    <p>Under Construction</p>
 			      </section>
 
@@ -196,6 +198,56 @@ export default function App() {
     </>
   )
 }
+
+
+// Mintbase API request
+
+
+fetch("https://mintbase-mainnet.hasura.app/v1/graphql", {
+  method:'POST',
+  headers: {"content-type": "application/json"},
+  body: JSON.stringify({ query: '{ thing(where: {tokens: {ownerId: {_eq: "jilt.near"}, _and: {list: {_not: {removedAt: {_is_null: false}}}}}}) { id, metadata { title, media }}}'}),
+})
+.then(response => response.json())
+.then(response => console.log(response));
+
+
+//Paras API request
+
+
+const xhttp = new XMLHttpRequest();
+
+// Define a callback function
+xhttp.onload = function() {
+  var json_obj = JSON.parse(this.responseText);
+  const lockpnfts = json_obj.data.results;
+
+//html template
+
+  var html = '';
+  
+  for(let lockable of lockpnfts){
+			var owner = 'jilt.near';
+			var preview = (lockable.metadata["image"]);
+			var myRe = /([^/]+$)/g;
+			var imgArray = myRe.exec(preview);
+			var title = (lockable.metadata["name"]);
+			html += '<li class="NFT-image"><a href="https://paras.id/' + owner + '/collectibles" target="_blank" class="link-preview"><img class="nft-image" src="https://' + imgArray[0] + '.ipfs.dweb.link" /><p>' + title + '</p></a></li> ';
+			    var el = document.querySelector('.target1');
+				el.innerHTML = '<ul>' + html + '</ul>';
+				//console.log(lockable);
+				
+}
+	}
+
+// Send a request
+
+var params = "ownerId=jilt.near";
+var yourUrl = 'https://mainnet-api.paras.id/tokens';
+xhttp.open("GET",yourUrl+"?"+params, true);
+xhttp.send();
+
+  
 
 // this component gets rendered by App after the form is submitted
 function Notification() {
@@ -217,4 +269,4 @@ function Notification() {
       </footer>
     </aside>
   )
-}
+};
