@@ -32,7 +32,64 @@ export default function App() {
          
         // We check NFTs from Paras
 
+        const xhttp = new XMLHttpRequest();
+
+        // Define a callback function
+        xhttp.onload = function() {
+          var json_obj = JSON.parse(this.responseText);
+          const lockpnfts = json_obj.data.results;
+        
+        //html template
+        
+          var html = '';
+          
+          for(let lockable of lockpnfts){
+              var preview = (lockable.metadata["image"]);
+              var myRe = /([^/]+$)/g;
+              var imgArray = myRe.exec(preview);
+              var title = (lockable.metadata["name"]);
+              html += '<li class="NFT-image"><a href="https://paras.id/' + owner + '/collectibles" target="_blank" class="link-preview"><img class="nft-image paras-image" src="https://' + imgArray[0] + '.ipfs.dweb.link" /><p>' + title + '</p></a></li> ';
+                  var el = document.querySelector('.target1');
+                el.innerHTML = '<ul>' + html + '</ul>';
+                
+        }
+          }
+        
+        // Send a request
+        
+        var params = "ownerId="+ owner;
+        var yourUrl = 'https://mainnet-api.paras.id/tokens';
+        xhttp.open("GET",yourUrl+"?"+params, true);
+        xhttp.send();
+        
+
         // We check NFTs from Mintbase
+
+        
+
+        fetch("https://mintbase-mainnet.hasura.app/v1/graphql", {
+        method:'POST',
+        headers: {"content-type": "application/json"},
+        body: JSON.stringify({ query: '{ thing(where: {tokens: {ownerId: {_eq: "'+owner+'"}, _and: {list: {_not: {removedAt: {_is_null: false}}}}}}) { id, metadata { title, media }}}'}),
+        })
+        .then(response => response.json())
+        .then(function(response) { 
+          const locks = (JSON.stringify(response));
+          const lockobj = JSON.parse(locks);
+          const locknfts = lockobj.data.thing;
+          var html = '';
+          
+          for(let lockable of locknfts){
+                for (var j = 0, k = locknfts.length; j < k; j++) {
+                let lockimg = locknfts[j].metadata.media;
+                const url = 'https://www.mintbase.io/thing/' + locknfts[j].id + '"';
+                html += '<li class="NFT-image"><a href="https://www.mintbase.io/thing/' + locknfts[j].id + '" target="_blank" class="link-preview"><img class="nft-image" src="' + lockimg + '"/><p>' + locknfts[j].metadata.title + '</p></a></li> ';
+                }
+                  var el = document.querySelector('.target');
+              el.innerHTML = '<ul>' + html + '</ul>';
+              };
+            })
+
       }
     },
 
@@ -200,54 +257,6 @@ export default function App() {
 }
 
 
-// Mintbase API request
-
-
-fetch("https://mintbase-mainnet.hasura.app/v1/graphql", {
-  method:'POST',
-  headers: {"content-type": "application/json"},
-  body: JSON.stringify({ query: '{ thing(where: {tokens: {ownerId: {_eq: "jilt.near"}, _and: {list: {_not: {removedAt: {_is_null: false}}}}}}) { id, metadata { title, media }}}'}),
-})
-.then(response => response.json())
-.then(response => console.log(response));
-
-
-//Paras API request
-
-
-const xhttp = new XMLHttpRequest();
-
-// Define a callback function
-xhttp.onload = function() {
-  var json_obj = JSON.parse(this.responseText);
-  const lockpnfts = json_obj.data.results;
-
-//html template
-
-  var html = '';
-  
-  for(let lockable of lockpnfts){
-			var owner = 'jilt.near';
-			var preview = (lockable.metadata["image"]);
-			var myRe = /([^/]+$)/g;
-			var imgArray = myRe.exec(preview);
-			var title = (lockable.metadata["name"]);
-			html += '<li class="NFT-image"><a href="https://paras.id/' + owner + '/collectibles" target="_blank" class="link-preview"><img class="nft-image" src="https://' + imgArray[0] + '.ipfs.dweb.link" /><p>' + title + '</p></a></li> ';
-			    var el = document.querySelector('.target1');
-				el.innerHTML = '<ul>' + html + '</ul>';
-				//console.log(lockable);
-				
-}
-	}
-
-// Send a request
-
-var params = "ownerId=jilt.near";
-var yourUrl = 'https://mainnet-api.paras.id/tokens';
-xhttp.open("GET",yourUrl+"?"+params, true);
-xhttp.send();
-
-  
 
 // this component gets rendered by App after the form is submitted
 function Notification() {

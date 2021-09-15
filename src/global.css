@@ -206,11 +206,15 @@ footer > span {
 }
 
 .NFT-image:hover {
-	background-color:#ddd;
+	background-color:#444;
 }
 
 .nft-image{
-	width: 7em;
+	width: 5em;
+}
+
+.paras-image {
+  width: 3.5em;
 }
 
 .link-preview {
