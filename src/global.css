@@ -15,7 +15,7 @@ html {
   background-color: var(--bg);
   color: var(--fg);
   font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
-  font-size: calc(0.9em + 0.5vw);
+  font-size: calc(0.6em + 0.5vw);
   line-height: 1.3;
 }
 
@@ -209,6 +209,12 @@ footer > span {
 	background-color:#444;
 }
 
+.NFT-image > button {
+  position: absolute;
+  right: 1.4em;
+  margin-top: 1.2em;
+}
+
 .nft-image{
 	width: 5em;
 }
@@ -314,9 +320,18 @@ label .fa {
 
 /*Media query*/
 @media only screen and (max-width: 900px) {
-  label span {
-    display: none;
-  }
+  label.tabs {
+    font-weight: 700;
+    font-size: 18px;
+    display: block;
+    float: left;
+    width: 33%;
+    padding: .5em;
+    color: #aaa;
+    cursor: pointer;
+    text-decoration: none;
+    text-align: center;
+}
   
   .tab_container {
     width: 98%;
@@ -349,4 +364,5 @@ label .fa {
 
 .target > ul, .target1 > ul {
 	list-style:none;
+  padding:0;
 }

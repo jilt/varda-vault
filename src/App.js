@@ -47,11 +47,22 @@ export default function App() {
               var preview = (lockable.metadata["image"]);
               var myRe = /([^/]+$)/g;
               var imgArray = myRe.exec(preview);
+              var lockipfs = 'QmVtiW8oey8CcRt6MRdZkihB4TgRLAooo2qKmC4YmTb5cW';
+              var locklink = '';
               var title = (lockable.metadata["name"]);
-              html += '<li class="NFT-image"><a href="https://paras.id/' + owner + '/collectibles" target="_blank" class="link-preview"><img class="nft-image paras-image" src="https://' + imgArray[0] + '.ipfs.dweb.link" /><p>' + title + '</p></a></li> ';
+              if(!locklink) {
+
+              html += '<li class="NFT-image"><a href="https://paras.id/' + owner + '/collectibles" target="_blank" class="link-preview"><img class="nft-image paras-image" src="https://' + imgArray[0] + '.ipfs.dweb.link" /><p>' + title + '</p></a><button><a href="https://dweb.link/ipfs/'+lockipfs+'" target="_blank">Unlock</a></button></li> ';
                   var el = document.querySelector('.target1');
                 el.innerHTML = '<ul>' + html + '</ul>';
                 
+              } else {
+              
+                html += '<li class="NFT-image"><a href="https://paras.id/' + owner + '/collectibles" target="_blank" class="link-preview"><img class="nft-image paras-image" src="https://' + imgArray[0] + '.ipfs.dweb.link" /><p>' + title + '</p></a><button><a href="'+locklink+'" target="_blank">Unlock</a></button></li> ';
+                var el = document.querySelector('.target1');
+                el.innerHTML = '<ul>' + html + '</ul>';
+
+              }
         }
           }
         
@@ -77,18 +88,33 @@ export default function App() {
           const locks = (JSON.stringify(response));
           const lockobj = JSON.parse(locks);
           const locknfts = lockobj.data.thing;
+          var lockipfs = '';
+          var locklink = 'https://www.varda.vision';
           var html = '';
-          
+          if(!locklink) {
           for(let lockable of locknfts){
                 for (var j = 0, k = locknfts.length; j < k; j++) {
                 let lockimg = locknfts[j].metadata.media;
                 const url = 'https://www.mintbase.io/thing/' + locknfts[j].id + '"';
-                html += '<li class="NFT-image"><a href="https://www.mintbase.io/thing/' + locknfts[j].id + '" target="_blank" class="link-preview"><img class="nft-image" src="' + lockimg + '"/><p>' + locknfts[j].metadata.title + '</p></a></li> ';
+                html += '<li class="NFT-image"><a href="https://www.mintbase.io/thing/' + locknfts[j].id + '" target="_blank" class="link-preview"><img class="nft-image" src="' + lockimg + '"/><p>' + locknfts[j].metadata.title + '</p></a><button><a href="https://dweb.link/ipfs/'+lockipfs+'" target="_blank">Unlock</a></button></li> ';
                 }
                   var el = document.querySelector('.target');
               el.innerHTML = '<ul>' + html + '</ul>';
               };
-            })
+            } else {
+
+              for(let lockable of locknfts){
+                for (var j = 0, k = locknfts.length; j < k; j++) {
+                let lockimg = locknfts[j].metadata.media;
+                const url = 'https://www.mintbase.io/thing/' + locknfts[j].id + '"';
+                html += '<li class="NFT-image"><a href="https://www.mintbase.io/thing/' + locknfts[j].id + '" target="_blank" class="link-preview"><img class="nft-image" src="' + lockimg + '"/><p>' + locknfts[j].metadata.title + '</p></a><button><a href="'+locklink+'" target="_blank">Unlock</a></button></li> ';
+                }
+                  var el = document.querySelector('.target');
+              el.innerHTML = '<ul>' + html + '</ul>';
+              };
+
+            }
+        })
 
       }
     },
