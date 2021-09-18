@@ -6,7 +6,14 @@ import './global.css'
 import getConfig from './config'
 const { networkId } = getConfig(process.env.NODE_ENV || 'development')
 
+//modal component imports
+import Modal from './components/modal'
+import useToggle from './useToggle'
+
 export default function App() {
+  //modal state setup
+  const [open, setOpen] = useToggle(false);
+
   // use React Hooks to store greeting in component state
   const [greeting, setGreeting] = React.useState()
 
@@ -52,13 +59,13 @@ export default function App() {
               var title = (lockable.metadata["name"]);
               if(!locklink) {
 
-              html += '<li class="NFT-image"><a href="https://paras.id/' + owner + '/collectibles" target="_blank" class="link-preview"><img class="nft-image paras-image" src="https://' + imgArray[0] + '.ipfs.dweb.link" /><p>' + title + '</p></a><button><a href="https://dweb.link/ipfs/'+lockipfs+'" target="_blank">Unlock</a></button></li> ';
+              html += '<li class="NFT-image"><a href="https://paras.id/' + owner + '/collectibles" target="_blank" class="link-preview"><img class="nft-image paras-image" src="https://' + imgArray[0] + '.ipfs.dweb.link" /><p>' + title + '</p></a><button><a href="https://dweb.link/ipfs/'+lockipfs+'" target="_blank">Unlock</a></button></li>';
                   var el = document.querySelector('.target1');
                 el.innerHTML = '<ul>' + html + '</ul>';
                 
               } else {
               
-                html += '<li class="NFT-image"><a href="https://paras.id/' + owner + '/collectibles" target="_blank" class="link-preview"><img class="nft-image paras-image" src="https://' + imgArray[0] + '.ipfs.dweb.link" /><p>' + title + '</p></a><button><a href="'+locklink+'" target="_blank">Unlock</a></button></li> ';
+                html += '<li class="NFT-image"><a href="https://paras.id/' + owner + '/collectibles" target="_blank" class="link-preview"><img class="nft-image paras-image" src="https://' + imgArray[0] + '.ipfs.dweb.link" /><p>' + title + '</p></a><button><a href="'+locklink+'" target="_blank">Unlock</a></button></li>';
                 var el = document.querySelector('.target1');
                 el.innerHTML = '<ul>' + html + '</ul>';
 
@@ -91,6 +98,7 @@ export default function App() {
           var lockipfs = '';
           var locklink = 'https://www.varda.vision';
           var html = '';
+          var modalcall = {};
           if(!locklink) {
           for(let lockable of locknfts){
                 for (var j = 0, k = locknfts.length; j < k; j++) {
@@ -118,7 +126,7 @@ export default function App() {
 
       }
     },
-
+    
     // The second argument to useEffect tells React when to re-run the effect
     // Use an empty array to specify "only run on first render"
     // This works because signing into NEAR Wallet reloads the page
@@ -278,10 +286,22 @@ export default function App() {
         </p>
       </main>
       {showNotification && <Notification />}
+
+      <div className="modal-container">
+      <button type="button" onClick={() => setOpen()}>
+        Open Modal
+      </button>
+
+      {open && (
+        <Modal open={open} toggle={setOpen}>
+          <h1>Hello Modal</h1>
+        </Modal>
+      )}
+    </div>
+
     </>
   )
 }
-
 
 
 // this component gets rendered by App after the form is submitted
