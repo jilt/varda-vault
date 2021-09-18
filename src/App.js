@@ -83,12 +83,10 @@ export default function App() {
 
         // We check NFTs from Mintbase
 
-        
-
         fetch("https://mintbase-mainnet.hasura.app/v1/graphql", {
         method:'POST',
         headers: {"content-type": "application/json"},
-        body: JSON.stringify({ query: '{ thing(where: {tokens: {ownerId: {_eq: "'+owner+'"}, _and: {list: {_not: {removedAt: {_is_null: false}}}}}}) { id, metadata { title, media }}}'}),
+        body: JSON.stringify({ query: '{ thing(where: {tokens: {ownerId: {_eq: "'+ owner +'"}, _and: {list: {_not: {removedAt: {_is_null: false}}}}}}) { id, metadata { title, media }}}'}),
         })
         .then(response => response.json())
         .then(function(response) { 
@@ -98,7 +96,7 @@ export default function App() {
           var lockipfs = '';
           var locklink = 'https://www.varda.vision';
           var html = '';
-          var modalcall = {};
+
           if(!locklink) {
           for(let lockable of locknfts){
                 for (var j = 0, k = locknfts.length; j < k; j++) {
@@ -252,7 +250,7 @@ export default function App() {
           <form style={{
               visibility: 'hidden'
             }}>
-            <input className="owner" type="textbox" defaultValue="jilt.near"/>
+            <input className="owner" type="textbox" defaultValue={() => (e.value === owner)}/>
           </form>
           <div className="tab_container">
 			      <input id="tab1" type="radio" className="vault" name="tabs" defaultChecked/>
