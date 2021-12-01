@@ -1,20 +1,34 @@
-import 'regenerator-runtime/runtime'
-import React from 'react'
-import { login, logout } from './utils'
-import './global.css'
+import "regenerator-runtime/runtime";
+import React, { useState } from "react";
+import { login, logout } from "./utils";
+import "./global.css";
 
-import getConfig from './config'
-const { networkId } = getConfig(process.env.NODE_ENV || 'development')
+import getConfig from "./config";
+const { networkId } = getConfig(process.env.NODE_ENV || "development");
+
+//modal component imports
+import Modal from "./components/modal";
+import useToggle from "./useToggle";
 
 export default function App() {
+  //modal state setup
+  const [open, setOpen] = useToggle(false);
+  const [lockNftId, setLockNftId] = useState("");
+
   // use React Hooks to store greeting in component state
-  const [greeting, setGreeting] = React.useState()
+  const [greeting, setGreeting] = React.useState();
 
   // when the user has not yet interacted with the form, disable the button
-  const [buttonDisabled, setButtonDisabled] = React.useState(true)
+  const [buttonDisabled, setButtonDisabled] = React.useState(true);
 
   // after submitting the form, we want to show Notification
-  const [showNotification, setShowNotification] = React.useState(false)
+  const [showNotification, setShowNotification] = React.useState(false);
+
+  // function to setLockNftId
+  const handleSetLockNftId = (id) => {
+    setLockNftId(id);
+    setOpen();
+  };
 
   // The useEffect hook can be used to fire side-effects during render
   // Learn more: https://reactjs.org/docs/hooks-intro.html
@@ -22,12 +36,158 @@ export default function App() {
     () => {
       // in this case, we only care to query the contract when signed in
       if (window.walletConnection.isSignedIn()) {
-
         // window.contract is set by initContract in index.js
-        window.contract.getGreeting({ accountId: window.accountId })
-          .then(greetingFromContract => {
-            setGreeting(greetingFromContract)
-          })
+        window.contract
+          .getGreeting({ accountId: window.accountId })
+          .then((greetingFromContract) => {
+            setGreeting(greetingFromContract);
+          });
+        const owner = `${window.accountId}`.replace("testnet", "near");
+        console.log("owner", owner);
+
+        // We check NFTs from Paras
+
+        const xhttp = new XMLHttpRequest();
+
+        // Define a callback function
+        xhttp.onload = function () {
+          var json_obj = JSON.parse(this.responseText);
+          const lockpnfts = json_obj.data.results;
+
+          //html template
+
+          var html = "";
+
+          for (let lockable of lockpnfts) {
+            var preview = lockable.metadata["image"];
+            var myRe = /([^/]+$)/g;
+            var imgArray = myRe.exec(preview);
+            var lockipfs = "QmVtiW8oey8CcRt6MRdZkihB4TgRLAooo2qKmC4YmTb5cW";
+            var locklink = "";
+            var title = lockable.metadata["name"];
+            if (!locklink) {
+              html +=
+                '<li class="NFT-image"><a href="https://paras.id/' +
+                owner +
+                '/collectibles" target="_blank" class="link-preview"><img class="nft-image paras-image" src="https://' +
+                imgArray[0] +
+                '.ipfs.dweb.link" /><p>' +
+                title +
+                '</p></a><button><a href="https://dweb.link/ipfs/' +
+                lockipfs +
+                '" target="_blank">Unlock</a></button></li>';
+              var el = document.querySelector(".target1");
+              el.innerHTML = "<ul>" + html + "</ul>";
+            } else {
+              html +=
+                '<li class="NFT-image"><a href="https://paras.id/' +
+                owner +
+                '/collectibles" target="_blank" class="link-preview"><img class="nft-image paras-image" src="https://' +
+                imgArray[0] +
+                '.ipfs.dweb.link" /><p>' +
+                title +
+                '</p></a><button><a href="' +
+                locklink +
+                '" target="_blank">Unlock</a></button></li>';
+              var el = document.querySelector(".target1");
+              el.innerHTML = "<ul>" + html + "</ul>";
+            }
+          }
+        };
+
+        // Send a request
+
+        var params = "ownerId=" + owner;
+        var yourUrl = "https://mainnet-api.paras.id/tokens";
+        xhttp.open("GET", yourUrl + "?" + params, true);
+        xhttp.send();
+
+        // We check NFTs from Mintbase
+
+        fetch("https://mintbase-mainnet.hasura.app/v1/graphql", {
+          method: "POST",
+          headers: { "content-type": "application/json" },
+          body: JSON.stringify({
+            query:
+              '{ thing(where: {tokens: {ownerId: {_eq: "' +
+              owner +
+              '"}, _and: {list: {_not: {removedAt: {_is_null: false}}}}}}) { id, metadata { title, media }}}',
+          }),
+        })
+          .then((response) => response.json())
+          .then(function (response) {
+            const locks = JSON.stringify(response);
+            const lockobj = JSON.parse(locks);
+            const locknfts = lockobj.data.thing;
+            var lockipfs = "";
+            var locklink = "https://www.varda.vision";
+            var html = "";
+
+            if (!locklink) {
+              <ul>
+                {locknfts.map((item, i) => (
+                  <li key={i} class="NFT-image">
+                    <a
+                      href={`https://www.mintbase.io/thing/${item.id}`}
+                      target="_blank"
+                      class="link-preview"
+                    >
+                      <img class="nft-image" src={item.metadata.media} />
+                      <p>{item.metadata.title}</p>
+                      <button>
+                        <a
+                          href={`https://dweb.link/ipfs/${lockipfs}`}
+                          target="_blank"
+                          onClick={() => handleSetLockNftId(item.id)}
+                        >
+                          Unlock
+                        </a>
+                      </button>
+                    </a>
+                  </li>
+                ))}
+              </ul>;
+              // for (let lockable of locknfts) {
+              //   for (var j = 0, k = locknfts.length; j < k; j++) {
+              //     let lockimg = locknfts[j].metadata.media;
+              //     const url =
+              //       "https://www.mintbase.io/thing/" + locknfts[j].id + '"';
+              //     html +=
+              //       '<li class="NFT-image"><a href="https://www.mintbase.io/thing/' +
+              //       locknfts[j].id +
+              //       '" target="_blank" class="link-preview"><img class="nft-image" src="' +
+              //       lockimg +
+              //       '"/><p>' +
+              //       locknfts[j].metadata.title +
+              //       '</p></a><button><a href="https://dweb.link/ipfs/' +
+              //       lockipfs +
+              //       '" target="_blank">Unlock</a></button></li> ';
+              //   }
+              //   var el = document.querySelector(".target");
+              //   el.innerHTML = "<ul>" + html + "</ul>";
+              // }
+            } else {
+              for (let lockable of locknfts) {
+                for (var j = 0, k = locknfts.length; j < k; j++) {
+                  let lockimg = locknfts[j].metadata.media;
+                  const url =
+                    "https://www.mintbase.io/thing/" + locknfts[j].id + '"';
+                  html +=
+                    '<li class="NFT-image"><a href="https://www.mintbase.io/thing/' +
+                    locknfts[j].id +
+                    '" target="_blank" class="link-preview"><img class="nft-image" src="' +
+                    lockimg +
+                    '"/><p>' +
+                    locknfts[j].metadata.title +
+                    '</p></a><button><a href="' +
+                    locklink +
+                    '" target="_blank">Unlock</a></button></li> ';
+                }
+                var el = document.querySelector(".target");
+                el.innerHTML = "<ul>" + html + "</ul>";
+              }
+            }
+          });
       }
     },
 
@@ -35,37 +195,39 @@ export default function App() {
     // Use an empty array to specify "only run on first render"
     // This works because signing into NEAR Wallet reloads the page
     []
-  )
+  );
 
   // if not signed in, return early with sign-in prompt
   if (!window.walletConnection.isSignedIn()) {
     return (
       <main>
-        <h1>Welcome to NEAR!</h1>
+        <run />
+        <h1>Varda Vault</h1>
+        <p>To access unlockable content from your NEAR NFTs login below</p>
         <p>
-          To make use of the NEAR blockchain, you need to sign in. The button
-          below will sign you in using NEAR Wallet.
+          For creators looking to lock content to NFTs please read this{" "}
+          <a
+            href="https://github.com/jilt/varda-vault#readme"
+            title="creator guide"
+          >
+            How To!
+          </a>
         </p>
         <p>
-          By default, when your app runs in "development" mode, it connects
-          to a test network ("testnet") wallet. This works just like the main
-          network ("mainnet") wallet, but the NEAR Tokens on testnet aren't
-          convertible to other currencies – they're just for testing!
+          This is a free service brought you by the{" "}
+          <a href="https://www.varda.vision">Varda Dev Team</a>.
         </p>
-        <p>
-          Go ahead and click the button below to try it out:
-        </p>
-        <p style={{ textAlign: 'center', marginTop: '2.5em' }}>
+        <p style={{ textAlign: "center", marginTop: "2.5em" }}>
           <button onClick={login}>Sign in</button>
         </p>
       </main>
-    )
+    );
   }
 
   return (
     // use React Fragment, <>, to avoid wrapping elements in unnecessary divs
     <>
-      <button className="link" style={{ float: 'right' }} onClick={logout}>
+      <button className="link" style={{ float: "right" }} onClick={logout}>
         Sign out
       </button>
       <main>
@@ -73,119 +235,191 @@ export default function App() {
           <label
             htmlFor="greeting"
             style={{
-              color: 'var(--secondary)',
-              borderBottom: '2px solid var(--secondary)'
+              color: "var(--secondary)",
+              borderBottom: "2px solid var(--secondary)",
             }}
           >
             {greeting}
           </label>
-          {' '/* React trims whitespace around tags; insert literal space character when needed */}
+          {
+            " " /* React trims whitespace around tags; insert literal space character when needed */
+          }
           {window.accountId}!
         </h1>
-        <form onSubmit={async event => {
-          event.preventDefault()
+        <p>
+          These are your NFTs, click on the botton to get the unlockable content
+          for each of them!
+        </p>
+        <form
+          onSubmit={async (event) => {
+            event.preventDefault();
 
-          // get elements from the form using their id attribute
-          const { fieldset, greeting } = event.target.elements
+            // get elements from the form using their id attribute
+            const { fieldset, greeting } = event.target.elements;
 
-          // hold onto new user-entered value from React's SynthenticEvent for use after `await` call
-          const newGreeting = greeting.value
+            // hold onto new user-entered value from React's SynthenticEvent for use after `await` call
+            const newGreeting = greeting.value;
 
-          // disable the form while the value gets updated on-chain
-          fieldset.disabled = true
+            // disable the form while the value gets updated on-chain
+            fieldset.disabled = true;
 
-          try {
-            // make an update call to the smart contract
-            await window.contract.setGreeting({
-              // pass the value that the user entered in the greeting field
-              message: newGreeting
-            })
-          } catch (e) {
-            alert(
-              'Something went wrong! ' +
-              'Maybe you need to sign out and back in? ' +
-              'Check your browser console for more info.'
-            )
-            throw e
-          } finally {
-            // re-enable the form, whether the call succeeded or failed
-            fieldset.disabled = false
-          }
+            try {
+              // make an update call to the smart contract
+              await window.contract.setGreeting({
+                // pass the value that the user entered in the greeting field
+                message: newGreeting,
+              });
+            } catch (e) {
+              alert(
+                "Something went wrong! " +
+                  "Maybe you need to sign out and back in? " +
+                  "Check your browser console for more info."
+              );
+              throw e;
+            } finally {
+              // re-enable the form, whether the call succeeded or failed
+              fieldset.disabled = false;
+            }
 
-          // update local `greeting` variable to match persisted value
-          setGreeting(newGreeting)
+            // update local `greeting` variable to match persisted value
+            setGreeting(newGreeting);
 
-          // show Notification
-          setShowNotification(true)
+            // show Notification
+            setShowNotification(true);
 
-          // remove Notification again after css animation completes
-          // this allows it to be shown again next time the form is submitted
-          setTimeout(() => {
-            setShowNotification(false)
-          }, 11000)
-        }}>
+            // remove Notification again after css animation completes
+            // this allows it to be shown again next time the form is submitted
+            setTimeout(() => {
+              setShowNotification(false);
+            }, 11000);
+          }}
+        >
           <fieldset id="fieldset">
             <label
               htmlFor="greeting"
               style={{
-                display: 'block',
-                color: 'var(--gray)',
-                marginBottom: '0.5em'
+                display: "block",
+                color: "var(--gray)",
+                marginBottom: "0.5em",
               }}
             >
               Change greeting
             </label>
-            <div style={{ display: 'flex' }}>
+            <div style={{ display: "flex" }}>
               <input
                 autoComplete="off"
                 defaultValue={greeting}
                 id="greeting"
-                onChange={e => setButtonDisabled(e.target.value === greeting)}
+                onChange={(e) => setButtonDisabled(e.target.value === greeting)}
                 style={{ flex: 1 }}
               />
               <button
                 disabled={buttonDisabled}
-                style={{ borderRadius: '0 5px 5px 0' }}
+                style={{ borderRadius: "0 5px 5px 0" }}
               >
                 Save
               </button>
             </div>
           </fieldset>
         </form>
-        <p>
-          Look at that! A Hello World app! This greeting is stored on the NEAR blockchain. Check it out:
-        </p>
-        <ol>
-          <li>
-            Look in <code>src/App.js</code> and <code>src/utils.js</code> – you'll see <code>getGreeting</code> and <code>setGreeting</code> being called on <code>contract</code>. What's this?
-          </li>
-          <li>
-            Ultimately, this <code>contract</code> code is defined in <code>assembly/main.ts</code> – this is the source code for your <a target="_blank" rel="noreferrer" href="https://docs.near.org/docs/develop/contracts/overview">smart contract</a>.</li>
-          <li>
-            When you run <code>yarn dev</code>, the code in <code>assembly/main.ts</code> gets deployed to the NEAR testnet. You can see how this happens by looking in <code>package.json</code> at the <code>scripts</code> section to find the <code>dev</code> command.</li>
-        </ol>
+
+        <form
+          style={{
+            visibility: "hidden",
+          }}
+        >
+          <input
+            className="owner"
+            type="textbox"
+            defaultValue={() => e.value === owner}
+          />
+        </form>
+        <div className="tab_container">
+          <input
+            id="tab1"
+            type="radio"
+            className="vault"
+            name="tabs"
+            defaultChecked
+          />
+          <label htmlFor="tab1" className="tabs">
+            <i className="fa fa-code"></i>
+            <span>Mintbase</span>
+          </label>
+
+          <input id="tab2" type="radio" className="vault" name="tabs" />
+          <label htmlFor="tab2" className="tabs">
+            <i className="fa fa-pencil-square-o"></i>
+            <span>Paras</span>
+          </label>
+
+          <input id="tab3" type="radio" className="vault" name="tabs" />
+          <label htmlFor="tab3" className="tabs">
+            <i className="fa fa-bar-chart-o"></i>
+            <span>Pluminite</span>
+          </label>
+
+          <section id="content1" className="tab-content">
+            <div className="target"></div>
+          </section>
+
+          <section id="content2" className="tab-content">
+            <div className="target1"></div>
+          </section>
+
+          <section id="content3" className="tab-content">
+            <p>Under Construction</p>
+          </section>
+        </div>
+
         <hr />
-        <p>
-          To keep learning, check out <a target="_blank" rel="noreferrer" href="https://docs.near.org">the NEAR docs</a> or look through some <a target="_blank" rel="noreferrer" href="https://examples.near.org">example apps</a>.
+        <p
+          style={{
+            textAlign: "center",
+          }}
+        >
+          Free service brought you by the{" "}
+          <a href="https://www.varda.vision">Varda Dev Team</a>.
         </p>
       </main>
       {showNotification && <Notification />}
+
+      <div className="modal-container">
+        {/* <button type="button" onClick={() => setOpen()}>
+          Open Modal
+        </button> */}
+
+        {open && (
+          <Modal open={open} toggle={setOpen} locknftId={lockNftId}>
+            <h1>Khurram</h1>
+          </Modal>
+        )}
+      </div>
     </>
-  )
+  );
 }
 
 // this component gets rendered by App after the form is submitted
 function Notification() {
-  const urlPrefix = `https://explorer.${networkId}.near.org/accounts`
+  const urlPrefix = `https://explorer.${networkId}.near.org/accounts`;
   return (
     <aside>
-      <a target="_blank" rel="noreferrer" href={`${urlPrefix}/${window.accountId}`}>
+      <a
+        target="_blank"
+        rel="noreferrer"
+        href={`${urlPrefix}/${window.accountId}`}
+      >
         {window.accountId}
       </a>
-      {' '/* React trims whitespace around tags; insert literal space character when needed */}
-      called method: 'setGreeting' in contract:
-      {' '}
-      <a target="_blank" rel="noreferrer" href={`${urlPrefix}/${window.contract.contractId}`}>
+      {
+        " " /* React trims whitespace around tags; insert literal space character when needed */
+      }
+      called method: 'setGreeting' in contract:{" "}
+      <a
+        target="_blank"
+        rel="noreferrer"
+        href={`${urlPrefix}/${window.contract.contractId}`}
+      >
         {window.contract.contractId}
       </a>
       <footer>
@@ -193,5 +427,5 @@ function Notification() {
         <div>Just now</div>
       </footer>
     </aside>
-  )
+  );
 }
