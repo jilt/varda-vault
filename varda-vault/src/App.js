@@ -1,6 +1,7 @@
 import "regenerator-runtime/runtime";
 import React, { useState } from "react";
 import { login, logout } from "./utils";
+import Mintbase from './components/Mintbase'
 import "./global.css";
 
 import getConfig from "./config";
@@ -24,8 +25,13 @@ export default function App() {
   // after submitting the form, we want to show Notification
   const [showNotification, setShowNotification] = React.useState(false);
 
+  // function to get mintbase NFTs
+
+  const[mintbase, setMintbase] = useState([])
+
   // function to setLockNftId
   const handleSetLockNftId = (id) => {
+    console.log(id);
     setLockNftId(id);
     setOpen();
   };
@@ -42,152 +48,16 @@ export default function App() {
           .then((greetingFromContract) => {
             setGreeting(greetingFromContract);
           });
-        const owner = `${window.accountId}`.replace("testnet", "near");
-        console.log("owner", owner);
 
-        // We check NFTs from Paras
+        
+        // Check NFTs from Mintbase for Mintbase component
 
-        const xhttp = new XMLHttpRequest();
-
-        // Define a callback function
-        xhttp.onload = function () {
-          var json_obj = JSON.parse(this.responseText);
-          const lockpnfts = json_obj.data.results;
-
-          //html template
-
-          var html = "";
-
-          for (let lockable of lockpnfts) {
-            var preview = lockable.metadata["image"];
-            var myRe = /([^/]+$)/g;
-            var imgArray = myRe.exec(preview);
-            var lockipfs = "QmVtiW8oey8CcRt6MRdZkihB4TgRLAooo2qKmC4YmTb5cW";
-            var locklink = "";
-            var title = lockable.metadata["name"];
-            if (!locklink) {
-              html +=
-                '<li class="NFT-image"><a href="https://paras.id/' +
-                owner +
-                '/collectibles" target="_blank" class="link-preview"><img class="nft-image paras-image" src="https://' +
-                imgArray[0] +
-                '.ipfs.dweb.link" /><p>' +
-                title +
-                '</p></a><button><a href="https://dweb.link/ipfs/' +
-                lockipfs +
-                '" target="_blank">Unlock</a></button></li>';
-              var el = document.querySelector(".target1");
-              el.innerHTML = "<ul>" + html + "</ul>";
-            } else {
-              html +=
-                '<li class="NFT-image"><a href="https://paras.id/' +
-                owner +
-                '/collectibles" target="_blank" class="link-preview"><img class="nft-image paras-image" src="https://' +
-                imgArray[0] +
-                '.ipfs.dweb.link" /><p>' +
-                title +
-                '</p></a><button><a href="' +
-                locklink +
-                '" target="_blank">Unlock</a></button></li>';
-              var el = document.querySelector(".target1");
-              el.innerHTML = "<ul>" + html + "</ul>";
-            }
-          }
-        };
-
-        // Send a request
-
-        var params = "ownerId=" + owner;
-        var yourUrl = "https://mainnet-api.paras.id/tokens";
-        xhttp.open("GET", yourUrl + "?" + params, true);
-        xhttp.send();
-
-        // We check NFTs from Mintbase
-
-        fetch("https://mintbase-mainnet.hasura.app/v1/graphql", {
-          method: "POST",
-          headers: { "content-type": "application/json" },
-          body: JSON.stringify({
-            query:
-              '{ thing(where: {tokens: {ownerId: {_eq: "' +
-              owner +
-              '"}, _and: {list: {_not: {removedAt: {_is_null: false}}}}}}) { id, metadata { title, media }}}',
-          }),
-        })
-          .then((response) => response.json())
-          .then(function (response) {
-            const locks = JSON.stringify(response);
-            const lockobj = JSON.parse(locks);
-            const locknfts = lockobj.data.thing;
-            var lockipfs = "";
-            var locklink = "https://www.varda.vision";
-            var html = "";
-
-            if (!locklink) {
-              <ul>
-                {locknfts.map((item, i) => (
-                  <li key={i} class="NFT-image">
-                    <a
-                      href={`https://www.mintbase.io/thing/${item.id}`}
-                      target="_blank"
-                      class="link-preview"
-                    >
-                      <img class="nft-image" src={item.metadata.media} />
-                      <p>{item.metadata.title}</p>
-                      <button>
-                        <a
-                          href={`https://dweb.link/ipfs/${lockipfs}`}
-                          target="_blank"
-                          onClick={() => handleSetLockNftId(item.id)}
-                        >
-                          Unlock
-                        </a>
-                      </button>
-                    </a>
-                  </li>
-                ))}
-              </ul>;
-              // for (let lockable of locknfts) {
-              //   for (var j = 0, k = locknfts.length; j < k; j++) {
-              //     let lockimg = locknfts[j].metadata.media;
-              //     const url =
-              //       "https://www.mintbase.io/thing/" + locknfts[j].id + '"';
-              //     html +=
-              //       '<li class="NFT-image"><a href="https://www.mintbase.io/thing/' +
-              //       locknfts[j].id +
-              //       '" target="_blank" class="link-preview"><img class="nft-image" src="' +
-              //       lockimg +
-              //       '"/><p>' +
-              //       locknfts[j].metadata.title +
-              //       '</p></a><button><a href="https://dweb.link/ipfs/' +
-              //       lockipfs +
-              //       '" target="_blank">Unlock</a></button></li> ';
-              //   }
-              //   var el = document.querySelector(".target");
-              //   el.innerHTML = "<ul>" + html + "</ul>";
-              // }
-            } else {
-              for (let lockable of locknfts) {
-                for (var j = 0, k = locknfts.length; j < k; j++) {
-                  let lockimg = locknfts[j].metadata.media;
-                  const url =
-                    "https://www.mintbase.io/thing/" + locknfts[j].id + '"';
-                  html +=
-                    '<li class="NFT-image"><a href="https://www.mintbase.io/thing/' +
-                    locknfts[j].id +
-                    '" target="_blank" class="link-preview"><img class="nft-image" src="' +
-                    lockimg +
-                    '"/><p>' +
-                    locknfts[j].metadata.title +
-                    '</p></a><button><a href="' +
-                    locklink +
-                    '" target="_blank">Unlock</a></button></li> ';
-                }
-                var el = document.querySelector(".target");
-                el.innerHTML = "<ul>" + html + "</ul>";
-              }
-            }
-          });
+        const getMintbase = async() => {
+          const mintbase = await fetchMintbase()
+          setMintbase(mintbase)
+        }
+      
+        getMintbase()
       }
     },
 
@@ -196,6 +66,30 @@ export default function App() {
     // This works because signing into NEAR Wallet reloads the page
     []
   );
+  // Mintbase API call
+
+  const fetchMintbase = async (id) => {
+
+    // define owner using wallet
+    const owner = `${window.accountId}`.replace("testnet", "near");
+    const res = await fetch("https://mintbase-mainnet.hasura.app/v1/graphql", {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify({
+        query:
+          '{ thing(where: {tokens: {ownerId: {_eq: "' +
+          owner +
+          '"}, _and: {list: {_not: {removedAt: {_is_null: false}}}}}}) { id, metadata { title, media }}}',
+      }),
+    }) 
+    const data = await res.json()
+    const datastr = JSON.stringify(data);
+    const raw = JSON.parse(datastr);
+    const mintbase = raw.data.thing;
+    console.log(mintbase);
+    return mintbase
+  }
+
 
   // if not signed in, return early with sign-in prompt
   if (!window.walletConnection.isSignedIn()) {
@@ -360,7 +254,9 @@ export default function App() {
           </label>
 
           <section id="content1" className="tab-content">
-            <div className="target"></div>
+            <div className="target">
+
+            </div>
           </section>
 
           <section id="content2" className="tab-content">
