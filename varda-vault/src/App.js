@@ -31,7 +31,6 @@ export default function App() {
 
   // function to setLockNftId
   const handleSetLockNftId = (id) => {
-    console.log(id);
     setLockNftId(id);
     setOpen();
   };
@@ -52,7 +51,7 @@ export default function App() {
         
         // Check NFTs from Mintbase for Mintbase component
 
-        const getMintbase = async() => {
+        const getMintbase = async(id) => {
           const mintbase = await fetchMintbase()
           setMintbase(mintbase)
         }
@@ -68,7 +67,7 @@ export default function App() {
   );
   // Mintbase API call
 
-  const fetchMintbase = async (id) => {
+  const fetchMintbase = async () => {
 
     // define owner using wallet
     const owner = `${window.accountId}`.replace("testnet", "near");
@@ -86,7 +85,6 @@ export default function App() {
     const datastr = JSON.stringify(data);
     const raw = JSON.parse(datastr);
     const mintbase = raw.data.thing;
-    console.log(mintbase);
     return mintbase
   }
 
@@ -255,7 +253,7 @@ export default function App() {
 
           <section id="content1" className="tab-content">
             <div className="target">
-              <Mintbase mintbase={mintbase} action={() => setOpen()}/>
+              <Mintbase mintbase={mintbase} action={() => handleSetLockNftId()}/>
             </div>
           </section>
 
