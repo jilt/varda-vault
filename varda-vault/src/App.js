@@ -255,12 +255,12 @@ export default function App() {
 
           <section id="content1" className="tab-content">
             <div className="target">
-
+              <Mintbase mintbase={mintbase} action={() => setOpen()}/>
             </div>
           </section>
 
           <section id="content2" className="tab-content">
-            <div className="target1"></div>
+            <div className="target1"><p>Under Construction</p></div>
           </section>
 
           <section id="content3" className="tab-content">
@@ -287,7 +287,7 @@ export default function App() {
 
         {open && (
           <Modal open={open} toggle={setOpen} locknftId={lockNftId}>
-            <h1>Khurram</h1>
+            <h1>{lockNftId}</h1>
           </Modal>
         )}
       </div>

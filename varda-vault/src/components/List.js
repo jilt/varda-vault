@@ -1,4 +1,5 @@
-const List = ({ item }) => {
+import React from 'react';
+const List = ({ item, action }) => {
 
 
 	return (
@@ -6,12 +7,12 @@ const List = ({ item }) => {
             <a
                       href={`https://www.mintbase.io/thing/${item.id}`}
                       target="_blank"
-                      class="link-preview"
+                      className="link-preview"
                     >
-                        <img class="nft-image" src={item.metadata.media} />
+                        <img className="nft-image" src={item.metadata.media} />
                         <p>{item.metadata.title}</p>
                         </a>
-                        <button onClick={() => handleSetLockNftId(item.id)}>Unlock</button>
+                        <button onClick={action}>Unlock</button>
 
 		</li>
 	)

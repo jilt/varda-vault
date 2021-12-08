@@ -1,13 +1,14 @@
 import React from 'react';
 import List from './List'
 
-const Mintbase = ({ data }) => {
+
+const Mintbase = ({ mintbase, action }) => {
 
 
 	return (
 		<ul className='mintbase-listings'>
-			{data.map((item) => (
-				<List key={item.id} item={item} 
+			{mintbase.map((item) => (
+				<List key={item.id} item={item} action={action} lockNftId={item.id}
 				/>
 				))}
 		</ul>
