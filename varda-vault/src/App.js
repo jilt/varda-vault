@@ -25,11 +25,12 @@ export default function App() {
   // after submitting the form, we want to show Notification
   const [showNotification, setShowNotification] = React.useState(false);
 
-  // function to get mintbase NFTs
+  // state to get mintbase NFTs
 
   const[mintbase, setMintbase] = useState([])
 
   // function to setLockNftId
+  
   const handleSetLockNftId = (id) => {
     setLockNftId(id);
     setOpen();
@@ -51,12 +52,19 @@ export default function App() {
         
         // Check NFTs from Mintbase for Mintbase component
 
-        const getMintbase = async(id) => {
+        const getMintbase = async() => {
           const mintbase = await fetchMintbase()
           setMintbase(mintbase)
         }
       
         getMintbase()
+
+        const getLockNftId = async() =>{
+          mintbase.map((item) => {
+            const locknftId=item.id
+            setLockNftId(locknftId)
+          })
+        }
       }
     },
 
@@ -65,6 +73,7 @@ export default function App() {
     // This works because signing into NEAR Wallet reloads the page
     []
   );
+
   // Mintbase API call
 
   const fetchMintbase = async () => {
@@ -253,7 +262,7 @@ export default function App() {
 
           <section id="content1" className="tab-content">
             <div className="target">
-              <Mintbase mintbase={mintbase} action={() => handleSetLockNftId()}/>
+              <Mintbase mintbase={mintbase} action={handleSetLockNftId}/>
             </div>
           </section>
 
@@ -323,3 +332,4 @@ function Notification() {
     </aside>
   );
 }
+
