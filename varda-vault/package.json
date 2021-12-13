@@ -1,7 +1,7 @@
 {
   "name": "varda-vault",
   "version": "0.1.0",
-  "license": "UNLICENSED",
+  "license": "MIT",
   "scripts": {
     "build": "npm run build:contract && npm run build:web",
     "build:contract": "node contract/compile.js",
@@ -35,7 +35,8 @@
     "near-api-js": "~0.43.1",
     "react": "~17.0.1",
     "react-dom": "~17.0.1",
-    "regenerator-runtime": "~0.13.5"
+    "regenerator-runtime": "~0.13.5",
+    "web3.storage": "^3.5.1"
   },
   "resolutions": {
     "@babel/preset-env": "7.13.8"
