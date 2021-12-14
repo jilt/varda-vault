@@ -59,12 +59,6 @@ export default function App() {
       
         getMintbase()
 
-        const getLockNftId = async() =>{
-          mintbase.map((item) => {
-            const locknftId=item.id
-            setLockNftId(locknftId)
-          })
-        }
       }
     },
 
