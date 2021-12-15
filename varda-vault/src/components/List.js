@@ -1,5 +1,5 @@
 import React from 'react';
-const List = ({ item, action }) => {
+const List = ({ item, action, locknftId }) => {
 
 	return (
 		<li className="NFT-image" key={item.id} >
@@ -11,7 +11,7 @@ const List = ({ item, action }) => {
                         <img className="nft-image" src={item.metadata.media} />
                         <p>{item.metadata.title}</p>
                         </a>
-                        <button onClick={() => action(item.id)} >Unlock</button>
+                        <button onClick={action} id={locknftId}>Unlock</button>
 
 		</li>
 	)
