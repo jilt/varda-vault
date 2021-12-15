@@ -11,7 +11,7 @@ const List = ({ item, action, locknftId }) => {
                         <img className="nft-image" src={item.metadata.media} />
                         <p>{item.metadata.title}</p>
                         </a>
-                        <button onClick={action} id={locknftId}>Unlock</button>
+                        <button onClick={() => action(item.id)} >Unlock</button>
 
 		</li>
 	)

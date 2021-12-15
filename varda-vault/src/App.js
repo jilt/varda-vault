@@ -51,16 +51,19 @@ export default function App() {
         
         // Check NFTs from Mintbase for Mintbase component
 
-        const getMintbase = async(id) => {
+        const getMintbase = async() => {
           const mintbase = await fetchMintbase()
           setMintbase(mintbase)
         }
       
         getMintbase()
-<<<<<<< HEAD
 
-=======
->>>>>>> parent of 0bf3d650 (added NFT id to modal for Filecoin content)
+        const getLockNftId = async() =>{
+          mintbase.map((item) => {
+            const locknftId=item.id
+            setLockNftId(locknftId)
+          })
+        }
       }
     },
 
@@ -257,7 +260,7 @@ export default function App() {
 
           <section id="content1" className="tab-content">
             <div className="target">
-              <Mintbase mintbase={mintbase} action={() => handleSetLockNftId()}/>
+              <Mintbase mintbase={mintbase} action={handleSetLockNftId}/>
             </div>
           </section>
 
