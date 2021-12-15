@@ -93,7 +93,6 @@ export default function App() {
   }
 
 
-
   // if not signed in, return early with sign-in prompt
   if (!window.walletConnection.isSignedIn()) {
     return (
