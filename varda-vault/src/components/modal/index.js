@@ -30,7 +30,6 @@ function Modal({ children, toggle, open, locknftId }) {
             <StyledModal.CloseButton onClick={toggle}>
               &times;
             </StyledModal.CloseButton>
-            Id = {locknftId}
             {children}
           </StyledModal.ModalBody>
         </StyledModal.ModalWrapper>

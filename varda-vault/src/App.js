@@ -1,8 +1,10 @@
-import "regenerator-runtime/runtime";
-import React, { useState } from "react";
-import { login, logout } from "./utils";
+import "regenerator-runtime/runtime"
+import React, { useState } from "react"
+import { login, logout } from "./utils"
 import Mintbase from './components/Mintbase'
-import "./global.css";
+import "./global.css"
+import { Web3Storage, getFilesFromPath } from 'web3.storage/dist/bundle.esm.min.js'
+import Storage from './components/Storage'
 
 import getConfig from "./config";
 const { networkId } = getConfig(process.env.NODE_ENV || "development");
@@ -28,12 +30,40 @@ export default function App() {
   // function to get mintbase NFTs
 
   const[mintbase, setMintbase] = useState([])
+  
+  // function to get storage data
+  
+  const[stfetchUrl, setUploads] = useState ([])
+  
+  //function to get storage db
+  
+  const[straw, setDb] = useState([])
 
-  // function to setLockNftId
+  // function to set LockNftId
+  
   const handleSetLockNftId = (id) => {
     setLockNftId(id);
     setOpen();
   };
+
+  
+  //set web3.storage API token
+  
+  const web3Token = "xxx"
+
+ // add unlockable
+ 
+	const addUnlock = (lockable) => {
+	straw.push(lockable)
+	const blob = new Blob([JSON.stringify(straw)], {type : 'application/json'})
+	
+	const files = [
+    new File( [blob], 'root.json')
+	]
+	const client = makeStorageClient()
+	return client.put(files)
+	
+	}
 
   // The useEffect hook can be used to fire side-effects during render
   // Learn more: https://reactjs.org/docs/hooks-intro.html
@@ -57,7 +87,48 @@ export default function App() {
         }
       
         getMintbase()
+		
 
+		// get storage files for unlockables
+  
+		const listUploads = async () => {
+			const client = makeStorageClient()
+			const uploadNames = []
+			
+			for await (const upload of client.list()){
+				const uploadObject = {}
+				uploadObject.name = upload.name
+				uploadObject.id = upload.cid
+				uploadNames.push(uploadObject)
+			}
+			const lastUpdate = uploadNames[0].id
+			const stfetchUrl = "https://" + lastUpdate + ".ipfs.dweb.link/root.json"
+			setUploads(stfetchUrl)
+						
+			// web3 storage file/system variable call
+	
+
+			const fetchFilecoin = async () => {
+		
+			const stres = await fetch( stfetchUrl)
+			const stdata = await stres.json()
+			const stdatastr = JSON.stringify(stdata);
+			const straw = JSON.parse(stdatastr);
+			return straw
+			}
+			
+			// get db files for unlockables
+		
+			const getDb = async () => {
+				const straw = await fetchFilecoin()
+			setDb(straw)
+			}
+			getDb()
+	
+		}
+
+		listUploads()
+		
       }
     },
 
@@ -66,6 +137,9 @@ export default function App() {
     // This works because signing into NEAR Wallet reloads the page
     []
   );
+  
+
+  
   // Mintbase API call
 
   const fetchMintbase = async () => {
@@ -79,7 +153,7 @@ export default function App() {
         query:
           '{ thing(where: {tokens: {ownerId: {_eq: "' +
           owner +
-          '"}, _and: {list: {_not: {removedAt: {_is_null: false}}}}}}) { id, metadata { title, media }}}',
+          '"}}}) { id, metadata { title, media }}}',
       }),
     }) 
     const data = await res.json()
@@ -88,6 +162,13 @@ export default function App() {
     const mintbase = raw.data.thing;
     return mintbase
   }
+  
+	// Create default storage client
+  
+	function makeStorageClient() {
+		return new Web3Storage({ token: web3Token })
+	}
+
 
 
   // if not signed in, return early with sign-in prompt
@@ -139,8 +220,8 @@ export default function App() {
           }
           {window.accountId}!
         </h1>
-        <p>
-          These are your NFTs, click on the botton to get the unlockable content
+        <p className="text">
+          These are your NFTs, click on the button to get or save the unlockable content
           for each of them!
         </p>
         <form
@@ -249,7 +330,7 @@ export default function App() {
           <input id="tab3" type="radio" className="vault" name="tabs" />
           <label htmlFor="tab3" className="tabs">
             <i className="fa fa-bar-chart-o"></i>
-            <span>Pluminite</span>
+            <span>Vault Native</span>
           </label>
 
           <section id="content1" className="tab-content">
@@ -280,13 +361,11 @@ export default function App() {
       {showNotification && <Notification />}
 
       <div className="modal-container">
-        {/* <button type="button" onClick={() => setOpen()}>
-          Open Modal
-        </button> */}
+	  
 
         {open && (
-          <Modal open={open} toggle={setOpen} locknftId={lockNftId}>
-            <h1>{lockNftId}</h1>
+          <Modal open={open} toggle={setOpen} locknftId={lockNftId} >
+		  		<Storage straw={straw} locknftId={lockNftId} onAdd={addUnlock} />
           </Modal>
         )}
       </div>

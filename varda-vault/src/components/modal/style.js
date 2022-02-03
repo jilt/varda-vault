@@ -13,11 +13,11 @@ const ModalWrapper = styled.div`
 `;
 
 const ModalBody = styled.div`
-  background-color: #fefefe;
+  background-color: #fff;
   margin: auto;
   padding: 20px;
   border: 1px solid #888;
-  width: 30%;
+  width: 50%;
 `;
 
 const CloseButton = styled.span`

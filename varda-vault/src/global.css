@@ -2,6 +2,7 @@
   box-sizing: border-box;
 }
 
+
 html {
   --bg: #efefef;
   --fg: #1e1e1e;
@@ -37,7 +38,9 @@ h1 {
   margin-top: 0;
   padding: 3.5em 0 0.5em;
   text-align: center;
+  color:light-gray;
 }
+
 
 /* temporary */
 
@@ -66,7 +69,7 @@ button, input {
   outline: none;
 }
 
-button {
+button, .btn {
   background-color: var(--secondary);
   border-radius: 5px;
   border: none;
@@ -75,10 +78,10 @@ button {
   padding: 0.3em 0.75em;
   transition: transform 30ms;
 }
-button:hover, button:focus {
+button:hover, button:focus, .btn:hover, .btn:focus {
   box-shadow: 0 0 10em rgba(255, 255, 255, 0.2) inset;
 }
-button:active {
+button:active, .btn:active {
   box-shadow: 0 0 10em rgba(0, 0, 0, 0.1) inset;
 }
 button.link {
@@ -121,23 +124,32 @@ fieldset {
   border: none;
   padding: 2em 0;
 }
+.labUp {
+	display:block;
+}
 
 input {
-  background-color: var(--shadow);
-  border: none;
-  border-radius: 5px 0 0 5px;
+  background-color: white);
+  border: 1px solid --shadow;
+  border-radius: 5px;
   caret-color: var(--primary);
-  color: inherit;
+  color: --shadow;
   padding: 0.25em 1em;
+  margin: .5em;
+  display: block;
 }
 input::selection {
   background-color: var(--secondary);
   color: #efefef;
-}
-input:focus {
   box-shadow: 0 0 10em rgba(0, 0, 0, 0.02) inset;
 }
-
+input:focus, input:active {
+  box-shadow: 0 0 10em rgba(0, 0, 0, 0.02) inset;
+}
+.uplocker {
+	text-align:center;
+	width:95%;
+}
 code {
   color: var(--gray);
 }
@@ -180,12 +192,14 @@ aside footer *:last-child {
 @media (prefers-color-scheme: dark) {
   html {
     --bg: #1e1e1e;
-    --fg: #efefef;
+    --fg: #dfdfdf;
     --gray: #aaa;
     --shadow: #2a2a2a;
     --light-gray: #444;
   }
-
+  .text{
+	  color:#efefef;
+  }
   input:focus {
     box-shadow: 0 0 10em rgba(255, 255, 255, 0.02) inset;
   }
@@ -211,7 +225,7 @@ footer > span {
 
 .NFT-image > button {
   position: absolute;
-  right: 1.4em;
+  right: 2em;
   margin-top: 1.2em;
 }
 
@@ -234,6 +248,10 @@ footer > span {
 	color: #0ce;
 	font-weight: 600;
 } 
+
+#uplock {
+	color: #444;
+}
 
 @import url('https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css');
 
@@ -334,7 +352,10 @@ label .fa {
 }
   
   .tab_container {
-    width: 98%;
+    width: 100%;
+  }
+  .NFT-image > a {
+	  font-size: 9px;
   }
 }
 
@@ -365,4 +386,75 @@ label .fa {
 .target > ul, .target1 > ul {
 	list-style:none;
   padding:0;
+}
+
+/* Loader */
+
+.loader {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	min-height: 100%;
+	background-color: #1e1e1e;
+}
+@keyframes rotationLoader {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.circle-container {
+  display: block;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  margin: auto;
+  margin-top: 18em;
+  margin-bottom: 2em;
+  position: relative;
+  -webkit-backface-visibility: hidden;
+  -moz-backface-visibility: hidden;
+  -webkit-transform: translate3d(0, 0, 0);
+  -moz-transform: translate3d(0, 0, 0);
+  overflow: hidden;
+}
+.circle-container .circle-content {
+  background-color: #1e1e1e;
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  z-index: 2;
+}
+.circle-container .animated-block {
+  background-color: #ed71f3;
+  width: 80px;
+  height: 80px;
+  position: absolute;
+  left: -30px;
+  top: -30px;
+  z-index: 1;
+  transform-origin: 100% 100%;
+  transform: rotate(0deg);
+  animation-name: rotationLoader;
+  animation-duration: 1s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-direction: normal;
+}
+.circle-container .animated-block.first {
+  animation-delay: 0s;
+}
+.circle-container .animated-block.second {
+  animation-delay: 0.14s;
+}
+.suggestion, .suggestion > h3 {
+	margin: auto;
+    text-align: center;
 }
