@@ -1,17 +1,19 @@
-const ListParas = ({ item }) => {
+import React from 'react'
+
+const ListParas = ({ item, action, locknftId }) => {
 
 
 	return (
 		<li className="NFT-image" key={item.id} >
             <a
-                      href={`https://paras.id/${item.owner}/collectibles`}
+                      href={`https://paras.id/token/x.paras.near::${item.token_series_id}`}
                       target="_blank"
-                      class="link-preview"
+                      className="link-preview"
                     >
-                        <img class="nft-image" src={item.metadata.image} />
-                        <p>{item.metadata.name}</p>
+                        <img className="nft-image" src={`https://${item.media}.ipfs.dweb.link`} />
+                        <p>{item.title}</p>
                         </a>
-                        <button onClick={() => handleSetLockNftId(item.id)}>Unlock</button>
+                        <button onClick={() => action(item.id)}>Unlock</button>
 
 		</li>
 	)

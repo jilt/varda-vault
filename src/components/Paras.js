@@ -1,12 +1,13 @@
-import ListParas from './ListParas'
+import React from 'react'
+import ListParas from './ListParas.js'
 
-const Paras = ({ paras }) => {
+const Paras = ({ paras, action }) => {
 
 
 	return (
 		<ul className='paras-listings'>
 			{paras.map((item) => (
-				<ListParas key={item.id} item={item} 
+				<ListParas key={item.id} item={item} action={action} locknftId={item.id}
 				/>
 				))}
 		</ul>

@@ -2,6 +2,7 @@ import "regenerator-runtime/runtime"
 import React, { useState } from "react"
 import { login, logout } from "./utils"
 import Mintbase from './components/Mintbase'
+import Paras from './components/Paras'
 import "./global.css"
 import { Web3Storage, getFilesFromPath } from 'web3.storage/dist/bundle.esm.min.js'
 import Storage from './components/Storage'
@@ -30,6 +31,10 @@ export default function App() {
   // function to get mintbase NFTs
 
   const[mintbase, setMintbase] = useState([])
+  
+    // function to get paras NFTs
+
+  const[paras, setParas] = useState([])
   
   // function to get storage data
   
@@ -87,6 +92,15 @@ export default function App() {
         }
       
         getMintbase()
+		
+        // Check NFTs from Paras for Paras component
+
+        const getParas = async() => {
+          const paras = await fetchParas()
+          setParas(paras)
+        }
+      
+        getParas()
 		
 
 		// get storage files for unlockables
@@ -161,6 +175,30 @@ export default function App() {
     const raw = JSON.parse(datastr);
     const mintbase = raw.data.thing;
     return mintbase
+  }
+  
+    // Paras API call
+
+  const fetchParas = async () => {
+
+    // define owner using wallet
+    const owner = `${window.accountId}`.replace("testnet", "near");
+    const res = await fetch("https://api.thegraph.com/subgraphs/name/aluhning/parasv3", {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify({
+        query:
+          '{ tokenSearch(text: "' +
+          owner +
+          '") { id, media, title, token_series_id }}',
+      }),
+    })
+
+    const pdata = await res.json()
+    const pdatastr = JSON.stringify(pdata);
+    const raw = JSON.parse(pdatastr);
+	const paras = raw.data.tokenSearch;
+    return paras
   }
   
 	// Create default storage client
@@ -340,7 +378,7 @@ export default function App() {
           </section>
 
           <section id="content2" className="tab-content">
-            <div className="target1"><p>Under Construction</p></div>
+            <div className="target1"><Paras paras={paras} action={handleSetLockNftId}/></div>
           </section>
 
           <section id="content3" className="tab-content">
