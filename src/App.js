@@ -6,7 +6,6 @@ import Paras from './components/Paras'
 import "./global.css"
 import { Web3Storage, getFilesFromPath } from 'web3.storage/dist/bundle.esm.min.js'
 import Storage from './components/Storage'
-import { LazyLoadImage } from 'react-lazy-load-image-component';
 
 import getConfig from "./config";
 const { networkId } = getConfig(process.env.NODE_ENV || "development");

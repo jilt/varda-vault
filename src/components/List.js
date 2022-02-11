@@ -1,4 +1,7 @@
 import React from 'react';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
+import 'react-lazy-load-image-component/src/effects/blur.css';
+
 const List = ({ item, action, locknftId }) => {
 
 	return (
@@ -8,7 +11,7 @@ const List = ({ item, action, locknftId }) => {
                       target="_blank"
                       className="link-preview"
                     >
-                        <img className="nft-image" src={item.metadata.media} />
+                        <LazyLoadImage alt={item.metadata.title} src={item.metadata.media} width={100}/>
                         <p>{item.metadata.title}</p>
                         </a>
                         <button onClick={() => action(item.id)} >Unlock</button>
