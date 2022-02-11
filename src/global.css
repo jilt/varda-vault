@@ -485,4 +485,5 @@ label .fa {
 .suggestion, .suggestion > h3 {
 	margin: auto;
     text-align: center;
+	opacity: .5;
 }

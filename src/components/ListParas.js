@@ -12,7 +12,7 @@ const ListParas = ({ item, action, locknftId }) => {
                       target="_blank"
                       className="link-preview"
                     >
-                        <LazyLoadImage alt={item.title} src={`https://${item.media}.ipfs.dweb.link`} width={100} />
+                        <LazyLoadImage alt={item.title} src={`https://${item.media}.ipfs.dweb.link`} width={100} effect="blur"/>
                         <p>{item.title}</p>
                         </a>
                         <button onClick={() => action(item.id)}>Unlock</button>

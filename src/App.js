@@ -236,7 +236,7 @@ export default function App() {
       </button>
       <main>
         <h1>
-          Hi {window.accountId}!
+          Hi {window.accountId.replace("testnet", "near")}!
         </h1>
         <form
           style={{
@@ -296,7 +296,7 @@ export default function App() {
 				<h6 className="right">hodling APY 10%</h6>
 				<h6 className="right"><a href="https://www.ref.finance/" target="_blank" title="swap to near" alt="swap to near">swap here</a> to stop earning</h6>
 			<p>
-				<button className="tools-btn btn"><a href="#" title="coming soon" alt="coming soon">Metaverse</a></button>  See the Varda PLOTS and collabs with metaverse platforms on NEAR
+				<button className="tools-btn btn"><a href="#" title="coming soon" alt="coming soon">Metaverse</a></button>  See the Varda's DeFi tools for building your P2E metaverse on Near.
 			</p>
 			<p>
 				<button className="tools-btn btn"><a href="#" title="coming soon" alt="coming soon">NFT curated collections</a></button>  Our premium art marketplace

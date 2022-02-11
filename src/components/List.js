@@ -11,7 +11,7 @@ const List = ({ item, action, locknftId }) => {
                       target="_blank"
                       className="link-preview"
                     >
-                        <LazyLoadImage alt={item.metadata.title} src={item.metadata.media} width={100}/>
+                        <LazyLoadImage alt={item.metadata.title} src={item.metadata.media} width={100} effect="blur"/>
                         <p>{item.metadata.title}</p>
                         </a>
                         <button onClick={() => action(item.id)} >Unlock</button>
