@@ -1,6 +1,7 @@
 import React from 'react'
 import { useState } from 'react'
-import Loader from './Loader'
+// import Loader from './Loader'
+import { CountdownCircleTimer } from 'react-countdown-circle-timer'
 
 const Uplocker = ({ locknftId, onAdd }) => {
 // set web3.storage API token
@@ -60,7 +61,14 @@ const onSubmit = (e) => {
 			<br />
 			<input type="submit" value="Save Unlockable" className="btn uplocker" />
 		</form>
-		{loading && <Loader />}
+		{loading && <div className="center"><CountdownCircleTimer
+    isPlaying
+    duration={10}
+    colors="#ae84f0"
+    onComplete={() => {
+       window.location.reload(false)
+    }}
+  /></div>}
 	</div>
 	)
 }
