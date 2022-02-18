@@ -6,7 +6,7 @@ import { CountdownCircleTimer } from 'react-countdown-circle-timer'
 const Uplocker = ({ locknftId, onAdd }) => {
 // set web3.storage API token
   
-const web3Token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkaWQ6ZXRocjoweEM4QTI5REE2YTUzN2UwMWM0OUQxMzdkQTNEOTUzYUVCNTkwRWJGYjIiLCJpc3MiOiJ3ZWIzLXN0b3JhZ2UiLCJpYXQiOjE2MzE3MjQwNjY1OTcsIm5hbWUiOiJWYXJkYS10ZXN0In0.F5up-mqqZC9q1CUssC6qlItZ5Dirkb7VgQLMjTbY9jo"
+const web3Token = "xxx"
 
 // component level states	
 
