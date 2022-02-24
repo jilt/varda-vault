@@ -47,6 +47,7 @@
     "assemblyscript": "^0.19.22",
     "file-system": "^2.2.2",
     "fs": "^0.0.1-security",
+    "near-cli": "~2.1.1",
     "near-api-js": "~0.43.1",
     "near-sdk-as": "^3.2.3",
     "qrcode.react": "^1.0.1",
