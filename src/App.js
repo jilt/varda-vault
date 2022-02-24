@@ -14,17 +14,6 @@ const { networkId } = getConfig(process.env.NODE_ENV || "development");
 import Modal from "./components/modal";
 import useToggle from "./useToggle";
 
-//heroku config
-
-const express = require('express');
-const app = express();
-
-// Start heroku server
-const PORT = process.env.PORT || 8080;
-app.listen(PORT, () => {
-  console.log(`App listening on port ${PORT}`);
-  console.log('Press Ctrl+C to quit.');
-});
 
 export default function App() {
   //modal state setup
