@@ -4,7 +4,7 @@ import { login, logout } from "./utils"
 import Mintbase from './components/Mintbase'
 import Paras from './components/Paras'
 import "./global.css"
-import { Web3Storage, getFilesFromPath } from 'web3.storage/dist/bundle.esm.min.js'
+import { Web3Storage, getFilesFromPath } from 'web3.storage'
 import Storage from './components/Storage'
 
 import getConfig from "./config";
