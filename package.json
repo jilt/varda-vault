@@ -6,7 +6,7 @@
     "node": "16.x"
   },
   "scripts": {
-    "start": "npm run build:contract && webpack --mode production && npm run build:web",
+    "start": "npm run build:contract && npm run build:web",
     "build:contract": "node contract/compile.js",
     "build:contract:debug": "node contract/compile.js --debug",
     "build:web": "parcel build src/index.html --public-url ./",
