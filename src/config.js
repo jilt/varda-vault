@@ -1,4 +1,4 @@
-const CONTRACT_NAME = process.env.CONTRACT_NAME ||'varda-vault'
+const CONTRACT_NAME = process.env.CONTRACT_NAME ||'varda-vault.near'
 
 function getConfig(env) {
   switch (env) {

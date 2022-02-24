@@ -223,7 +223,8 @@ footer > span {
 }
 
 .NFT-image {
-	padding:.5em;
+    padding: 0.5em;
+    min-height: 100px;
 }
 
 .NFT-image:hover {

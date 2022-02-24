@@ -47,7 +47,7 @@ export default function App() {
   
   //set web3.storage API token
   
-  const web3Token = "xxx"
+  const web3Token = process.env.WEB3TOKEN
 
  // add unlockable
  
@@ -173,7 +173,7 @@ export default function App() {
 
     // define owner using wallet
     const owner = `${window.accountId}`.replace("testnet", "near");
-    const res = await fetch("https://api.thegraph.com/subgraphs/name/aluhning/parasv3", {
+    const res = await fetch("https://api.thegraph.com/subgraphs/name/jilt/parasubgraph", {
       method: "POST",
       headers: { "content-type": "application/json" },
       body: JSON.stringify({

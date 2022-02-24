@@ -6,7 +6,7 @@ const ListParas = ({ item, action, locknftId }) => {
 
 
 	return (
-		<li className="NFT-image" key={item.id} >
+		<li className="NFT-image" key={item.id} id={item.id}>
             <a
                       href={`https://paras.id/token/x.paras.near::${item.token_series_id}`}
                       target="_blank"
