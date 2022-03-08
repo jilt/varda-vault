@@ -3,6 +3,8 @@ import React, { useState } from "react"
 import { login, logout } from "./utils"
 import Mintbase from './components/Mintbase'
 import Paras from './components/Paras'
+import Owned from './components/Owned'
+import Gifted from './components/Gifted'
 import "./global.css"
 import { Web3Storage, getFilesFromPath } from 'web3.storage/dist/bundle.esm.min.js'
 import Storage from './components/Storage'
@@ -29,6 +31,9 @@ export default function App() {
     // function to get paras NFTs
 
   const[paras, setParas] = useState([])
+  const[owned, setOwned] = useState([])
+  const[owned1, setOwned1] = useState([])
+  const[gifted, setGifted] = useState([])
   
   // function to get storage data
   
@@ -93,7 +98,29 @@ export default function App() {
       
         getParas()
 		
-
+		const getOwned = async() => {
+			const owned = await fetchOwned()
+			setOwned(owned)
+		}
+		
+		getOwned()
+		
+		const getOwned1 = async() => {
+			const owned1 = await fetchOwned1()
+			setOwned1(owned1)
+		}
+		
+		getOwned1()
+		
+		const getGifted = async() => {
+			const gifted = await fetchGifted()
+			setGifted(gifted)
+		}
+		
+		getGifted()
+				
+		
+		
 		// get storage files for unlockables
   
 		const listUploads = async () => {
@@ -172,9 +199,10 @@ export default function App() {
 
   const fetchParas = async () => {
 
-    // define owner using wallet
+// define owner using wallet
     const owner = `${window.accountId}`.replace("testnet", "near");
-    const res = await fetch("https://api.thegraph.com/subgraphs/name/jilt/parasubgraph", {
+	
+    const res = await fetch("https://api.thegraph.com/subgraphs/name/aluhning/parasv3", {
       method: "POST",
       headers: { "content-type": "application/json" },
       body: JSON.stringify({
@@ -188,11 +216,65 @@ export default function App() {
     const pdata = await res.json()
     const pdatastr = JSON.stringify(pdata);
     const raw = JSON.parse(pdatastr);
-	console.log(raw)
 	const paras = raw.data.tokenSearch;
     return paras
   }
   
+   const fetchOwned = async () => {
+//	   define owner using wallet
+	const owner = `${window.accountId}`.replace("testnet", "near");
+	const preres = await fetch ("https://api.thegraph.com/subgraphs/name/aluhning/parasv3", {
+		method: "POST",
+		headers: { "content-type": "application/json" },
+		body: JSON.stringify({
+			query:
+			  '{ nftBuys(where: {owner_id: "' + owner + '"}) { token_series_id }}'
+		}),
+	})
+	const owndata = await preres.json();
+	const owndatastr = JSON.stringify(owndata);
+	const ownraw = JSON.parse(owndatastr);
+	const owned = ownraw.data.nftBuys;
+	return owned;
+   }
+   
+    const fetchOwned1 = async () => {
+//	   define owner using wallet
+	const owner = `${window.accountId}`.replace("testnet", "near");
+	const preres1 = await fetch ("https://api.thegraph.com/subgraphs/name/aluhning/parasv3", {
+		method: "POST",
+		headers: { "content-type": "application/json" },
+		body: JSON.stringify({
+			query:
+			   '{ nftTransferPayouts(where: {new_owner_id: "' + owner + '"}) { token_series_id }}'
+		}),
+	})
+	const owndata1 = await preres1.json();
+	const owndatastr1 = JSON.stringify(owndata1);
+	const ownraw1 = JSON.parse(owndatastr1);
+	const owned1 = ownraw1.data.nftTransferPayouts;
+	return owned1;
+   }
+   
+   const fetchGifted = async () => {
+//	   define owner using wallet
+	const owner = `${window.accountId}`.replace("testnet", "near");
+	const pregres = await fetch ("https://api.thegraph.com/subgraphs/name/aluhning/parasv3", {
+		method: "POST",
+		headers: { "content-type": "application/json" },
+		body: JSON.stringify({
+			query:
+			  '{ nftTransfers(where: {new_owner_id: "' + owner + '"}) { token_series_id }}'
+		}),
+	})
+	const giftdata = await pregres.json();
+	const giftdatastr = JSON.stringify(giftdata);
+	const giftraw = JSON.parse(giftdatastr);
+	const gifted = giftraw.data.nftTransfers;
+	return gifted;
+   }
+  
+	
 	// Create default storage client
   
 	function makeStorageClient() {
@@ -284,8 +366,13 @@ export default function App() {
 
           <section id="content2" className="tab-content">
             <div className="target1">
-				<p className="suggestion">Paras NFTs that you own or created, click on the button to get or save the unlockable content</p>
+				<p className="suggestion">Paras NFTs that you created, click on the button to save the unlockable content</p>
 				<Paras paras={paras} action={handleSetLockNftId}/>
+				<p className="suggestion">Paras NFTs that you own, click on the button to get the unlockable content</p>
+				<Owned owned={owned1} action={handleSetLockNftId}/>
+				<Owned owned={owned} action={handleSetLockNftId}/>
+				<p className="suggestion">Gifted Paras NFTs, click on the button to get the unlockable content</p>
+				<Gifted gifted={gifted} action={handleSetLockNftId}/>
 			</div>
           </section>
 

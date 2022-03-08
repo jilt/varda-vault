@@ -3,7 +3,6 @@ import ListParas from './ListParas.js'
 
 const Paras = ({ paras, action }) => {
 
-
 	return (
 		<ul className='paras-listings'>
 			{paras.map((item) => (
