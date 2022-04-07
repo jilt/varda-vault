@@ -27,7 +27,6 @@ const ListOwned = ({ tokenid, action }) => {
 const getListData = async() => {
 			const tokenlist = await loaData()
 			setTokenList(tokenlist)
-			console.log(tokenlist)
 		}
 		getListData()
 
