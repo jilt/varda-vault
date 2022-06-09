@@ -62,7 +62,7 @@ const onSubmit = (e) => {
 		</form>
 		{loading && <div className="center"><CountdownCircleTimer
     isPlaying
-    duration={10}
+    duration={30}
     colors="#ae84f0"
     onComplete={() => {
        window.location.reload(false)

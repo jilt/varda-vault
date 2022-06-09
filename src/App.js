@@ -24,26 +24,26 @@ export default function App() {
 
 
 
-  // function to get mintbase NFTs
+  // state to get mintbase NFTs
 
   const[mintbase, setMintbase] = useState([])
   
-    // function to get paras NFTs
+    // state to get paras NFTs
 
   const[paras, setParas] = useState([])
   const[owned, setOwned] = useState([])
   const[owned1, setOwned1] = useState([])
   const[gifted, setGifted] = useState([])
   
-  // function to get storage data
+  // state to get storage data
   
   const[stfetchUrl, setUploads] = useState ([])
   
-  //function to get storage db
+  // state to get storage db
   
   const[straw, setDb] = useState([])
 
-  // function to set LockNftId
+  // state to set LockNftId
   
   const handleSetLockNftId = (id) => {
     setLockNftId(id);
@@ -58,14 +58,14 @@ export default function App() {
  // add unlockable
  
 	const addUnlock = (lockable) => {
-	straw.push(lockable)
-	const blob = new Blob([JSON.stringify(straw)], {type : 'application/json'})
+		straw.push(lockable)
+		const blob = new Blob([JSON.stringify(straw)], {type : 'application/json'})
 	
-	const files = [
-    new File( [blob], 'root.json')
-	]
-	const client = makeStorageClient()
-	return client.put(files)
+		const files = [
+		new File( [blob], 'root.json')
+		]
+		const client = makeStorageClient()
+		return client.put(files)
 	
 	}
 
@@ -158,7 +158,6 @@ export default function App() {
 			getDb()
 	
 		}
-
 		listUploads()
 		
       }
@@ -408,11 +407,13 @@ export default function App() {
 
         {open && (
           <Modal open={open} toggle={setOpen} locknftId={lockNftId} >
-		  		<Storage straw={straw} locknftId={lockNftId} onAdd={addUnlock} />
+		  		<Storage straw={straw} locknftId={lockNftId} onAdd={addUnlock}/>
           </Modal>
         )}
       </div>
     </>
   );
+  
+	listUploads()
 }
 
