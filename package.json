@@ -4,7 +4,7 @@
   "license": "MIT",
   "main": "dist/",
   "engines": {
-    "node": "16.x"
+    "node": "17.7.1"
   },
   "scripts": {
     "start": "npm run build:contract && webpack --mode production && npm run build:web",
