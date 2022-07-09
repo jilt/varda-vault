@@ -1,11 +1,7 @@
 name: varda-env
 
-on:
-      push:
-        branches:
-          - master
-
- env:
+on: [pull_request, push] 
+env:
             NODE_ENV: ${{ secrets.NODE_ENV }}
             WEB3TOKEN: ${{ secrets.WEB3TOKEN }}    
 
