@@ -1,11 +1,7 @@
-name: env_tutorial
+name: varda-env
 
-on:
-      push:
-        branches:
-          - master
-
- env:
+on: [pull_request, push] 
+env:
             NODE_ENV: ${{ secrets.NODE_ENV }}
             WEB3TOKEN: ${{ secrets.WEB3TOKEN }}    
 
@@ -14,6 +10,7 @@ jobs:
     ## The type of runner that the job will run on, 
     ## here it runs on ubuntu latest
     runs-on: ubuntu-latest 
+    environment: github-pages
     steps:
       - name: step 1
         ## Reference your environment variables
