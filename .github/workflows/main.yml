@@ -18,6 +18,7 @@ jobs:
 
   job2:
     runs-on: ubuntu-latest
+    environment: github-pages
     steps:
       - name: step 1
         ## Another way reference your environment variables
