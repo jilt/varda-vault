@@ -18,7 +18,7 @@ const [link, setLink] = useState('')
 // form submit
 
 const onSubmit = (e) => {
-	var name = locknftId
+	var id = locknftId
 	
 	e.preventDefault()
 	
@@ -31,7 +31,7 @@ const onSubmit = (e) => {
 		return
 	}
 	
-	onAdd({name ,CID ,link})
+	onAdd({id ,CID ,link})
 	
 	setCid('')
 	setLink('')
@@ -44,7 +44,6 @@ const onSubmit = (e) => {
 		<h2>Upload Unlockable</h2>
 		<form id="uplock" onSubmit={onSubmit}>
 			<p>You can lock content via <a href="https://web3.storage/account/" title="onchain immutable storage" alt="onchain immutable storage" target="_blank">web3.storage</a> CIDs or with a single link to your file or App, API for Apps and Games is under construction.</p>
-			<p>Remember that you can lock files to your NFT only one time.</p>
 			<p>
 				<button><a href="https://github.com/jilt/varda-vault#readme" title="tutorial" alt="tutorial" target="_blank">Creators Guide</a></button> <button><a href="https://github.com/jilt/varda-vault#readme" title="coming soon">Check link API</a></button>
 			</p>
@@ -60,14 +59,6 @@ const onSubmit = (e) => {
 			<br />
 			<input type="submit" value="Save Unlockable" className="btn uplocker" />
 		</form>
-		{loading && <div className="center"><CountdownCircleTimer
-    isPlaying
-    duration={30}
-    colors="#ae84f0"
-    onComplete={() => {
-       window.location.reload(false)
-    }}
-  /></div>}
 	</div>
 	)
 }

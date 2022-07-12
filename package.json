@@ -4,10 +4,10 @@
   "license": "MIT",
   "main": "dist/",
   "engines": {
-    "node": "16.16.0"
+    "node": "17.7.1"
   },
   "scripts": {
-    "start": "npm run build:contract && webpack --mode production && npm run build:web",
+    "start": "npm run build:contract && webpack --mode production && npm run build:web src/index.html --open",
     "build:contract": "node contract/compile.js",
     "build:contract:debug": "node contract/compile.js --debug",
     "build:web": "parcel build src/index.html --public-url ./",
@@ -76,7 +76,7 @@
     "shelljs": "^0.8.5",
     "style-loader": "^3.3.1",
     "styled-components": "^5.3.3",
-    "web3.storage": "^3.5.5",
+    "web3.storage": "^4.3.0",
     "webpack": "^5.66.0",
     "webpack-cli": "^4.9.1",
     "webpack-dev-server": "^4.7.3"

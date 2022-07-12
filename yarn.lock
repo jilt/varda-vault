@@ -2102,6 +2102,14 @@
     "@web-std/stream" "1.0.0"
     web-encoding "1.1.5"
 
+"@web-std/blob@^3.0.4":
+  version "3.0.4"
+  resolved "https://registry.yarnpkg.com/@web-std/blob/-/blob-3.0.4.tgz#dd67a685547331915428d69e723c7da2015c3fc5"
+  integrity sha512-+dibyiw+uHYK4dX5cJ7HA+gtDAaUUe6JsOryp2ZpAC7h4ICsh49E34JwHoEKPlPvP0llCrNzz45vvD+xX5QDBg==
+  dependencies:
+    "@web-std/stream" "1.0.0"
+    web-encoding "1.1.5"
+
 "@web-std/fetch@^3.0.3":
   version "3.0.3"
   resolved "https://registry.yarnpkg.com/@web-std/fetch/-/fetch-3.0.3.tgz#507e1371825298aae61172b0da439570437d3982"
@@ -3499,6 +3507,11 @@ cborg@^1.3.3, cborg@^1.5.4, cborg@^1.6.0:
   version "1.6.1"
   resolved "https://registry.yarnpkg.com/cborg/-/cborg-1.6.1.tgz#d5c6f6cfa8539588918c3936814caddc65e8e5ec"
   integrity sha512-dOGlTG610S6t3j7EYFxPBH7KiF1OlSAdWtMI4Iv1dabcId/L/nUvkfOEPge+vDp9YoPerEMiDoy5+Vm2oEqmQw==
+
+cborg@^1.8.0:
+  version "1.9.4"
+  resolved "https://registry.yarnpkg.com/cborg/-/cborg-1.9.4.tgz#85354ee6e0fe017dd34e300c3dcd044407a27800"
+  integrity sha512-ltobKo17xKYJolhg8UxQhvzcqXhjtUnovwe9Xx59Izo32gLwozGoJs/efp+8dZ5+zu9pNJYnHtmp6iJnDUapww==
 
 chalk@^1.1.3:
   version "1.1.3"
@@ -5384,12 +5397,13 @@ filenamify@^1.0.0:
     strip-outer "^1.0.0"
     trim-repeated "^1.0.0"
 
-files-from-path@^0.2.3:
-  version "0.2.3"
-  resolved "https://registry.yarnpkg.com/files-from-path/-/files-from-path-0.2.3.tgz#c522889ce2ca0480a84e04a976d7a740ecda0aa9"
-  integrity sha512-17ojZ0Lg9OYaoizK0jcs2G09nMgAUGMKs3LVbDwWtwolKYkPSx7cMKA9m+p/TOeuRnKvu+hgu/DG2Q4kSqzXcQ==
+files-from-path@^0.2.4:
+  version "0.2.6"
+  resolved "https://registry.yarnpkg.com/files-from-path/-/files-from-path-0.2.6.tgz#a093918d67ebfe1d50fffef926855574146cf571"
+  integrity sha512-Mz4UNkv+WcRLxcCXAORbfpwYiXI60SN9C1ZfeyGFv0xQUmblgbOkSWwFwX+Ov/TaR3FEyzwDyPnCQjpPRGSxKA==
   dependencies:
     err-code "^3.0.1"
+    graceful-fs "^4.2.9"
     ipfs-unixfs "^6.0.5"
     it-glob "^0.0.13"
 
@@ -6426,10 +6440,10 @@ ipaddr.js@^2.0.1:
   resolved "https://registry.yarnpkg.com/ipaddr.js/-/ipaddr.js-2.0.1.tgz#eca256a7a877e917aeb368b0a7497ddf42ef81c0"
   integrity sha512-1qTgH9NG+IIJ4yfKs2e6Pp1bZg8wbDbKHT21HrLIeYBTRLgMYKnMTPAuI3Lcs61nfx5h1xlXnbJtH1kX5/d/ng==
 
-ipfs-car@^0.6.2:
-  version "0.6.2"
-  resolved "https://registry.yarnpkg.com/ipfs-car/-/ipfs-car-0.6.2.tgz#ec645cebe29056344abb3545e4e2e99788a4405c"
-  integrity sha512-tliuakkKKtCa4TTnFT3zJKjq/aD8EGKX8Y0ybCyrAW0fo/n2koZpxiLjBvtTs47Rqyji6ggXo+atPbJJ60hJmg==
+ipfs-car@^0.7.0:
+  version "0.7.0"
+  resolved "https://registry.yarnpkg.com/ipfs-car/-/ipfs-car-0.7.0.tgz#72955d2b6904e87edfa17bbe5c00c1b3fcb79bb9"
+  integrity sha512-9ser6WWZ1ZMTCGbcVkRXUzOrpQ4SIiLfzIEnk+3LQsXbV09yeZg3ijhRuEXozEIYE68Go9JmOFshamsK9iKlNQ==
   dependencies:
     "@ipld/car" "^3.2.3"
     "@web-std/blob" "^3.0.1"
@@ -11229,6 +11243,11 @@ streaming-iterables@^6.0.0:
   resolved "https://registry.yarnpkg.com/streaming-iterables/-/streaming-iterables-6.0.0.tgz#317a315266fb956a2d4f9786a01410df8f78dc95"
   integrity sha512-GYbJh0ife8PvryWSyFifY1m1uj6zO12d9duuP6xltiOolUz44eKasp5gbFhRbFbLy50ik6hcKn4Pbxl9AkxB+Q==
 
+streaming-iterables@^6.2.0:
+  version "6.2.0"
+  resolved "https://registry.yarnpkg.com/streaming-iterables/-/streaming-iterables-6.2.0.tgz#e8079bc56272335b287e2f13274602fbef008e56"
+  integrity sha512-3AYC8oB60WyD1ic7uHmN/vm2oRGzRnQ3XFBl/bFMDi1q1+nc5/vjMmiE4vroIya3jG59t87VpyAj/iXYxyw9AA==
+
 strict-uri-encode@^1.0.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/strict-uri-encode/-/strict-uri-encode-1.1.0.tgz#279b225df1d582b1f54e65addd4352e18faa0713"
@@ -11586,6 +11605,11 @@ throat@^5.0.0:
   version "5.0.0"
   resolved "https://registry.yarnpkg.com/throat/-/throat-5.0.0.tgz#c5199235803aad18754a667d659b5e72ce16764b"
   integrity sha512-fcwX4mndzpLQKBS1DVYhGAcYaYt7vsHNIvQV+WXMvnow5cgjPphq5CaayLaGsjRdSCKZFNGt7/GYAuXaNOiYCA==
+
+throttled-queue@^2.1.2:
+  version "2.1.4"
+  resolved "https://registry.yarnpkg.com/throttled-queue/-/throttled-queue-2.1.4.tgz#4e2008c73ab3f72ba1bb09496c3cc9c5b745dbee"
+  integrity sha512-YGdk8sdmr4ge3g+doFj/7RLF5kLM+Mi7DEciu9PHxnMJZMeVuZeTj31g4VE7ekUffx/IdbvrtOCiz62afg0mkg==
 
 through2@^2.0.0, through2@~2.0.3:
   version "2.0.5"
@@ -12265,25 +12289,26 @@ web-streams-polyfill@^3.1.1:
   resolved "https://registry.yarnpkg.com/web-streams-polyfill/-/web-streams-polyfill-3.2.0.tgz#a6b74026b38e4885869fb5c589e90b95ccfc7965"
   integrity sha512-EqPmREeOzttaLRm5HS7io98goBgZ7IVz79aDvqjD0kYXLtFZTc0T/U6wHTPKyIjb+MdN7DFIIX6hgdBEpWmfPA==
 
-web3.storage@^3.5.5:
-  version "3.5.5"
-  resolved "https://registry.yarnpkg.com/web3.storage/-/web3.storage-3.5.5.tgz#c63c63c737b4672f160ee35ff64c1c2f45687665"
-  integrity sha512-URvaAT1A7rcD9Q0Y+zbGVsad2j8CgaLqR0ifuxT+ecR96+fyfHa45mNMLY6KydAb2RGFpD4UgM23QX4i5iEtjA==
+web3.storage@^4.3.0:
+  version "4.3.0"
+  resolved "https://registry.yarnpkg.com/web3.storage/-/web3.storage-4.3.0.tgz#88f778a0e2463701a1d2434e9835d930fa7aa18f"
+  integrity sha512-9IKn+4dyF7cMXC9etVzW3qmCV/6sL+Za4kcUUn7D3qRt4s1DrKUGJdAe9VvYcpHwbnnYoKNBu06lGO++daDo8w==
   dependencies:
     "@ipld/car" "^3.1.4"
-    "@web-std/blob" "^3.0.3"
+    "@web-std/blob" "^3.0.4"
     "@web-std/fetch" "^3.0.3"
     "@web-std/file" "^3.0.2"
     "@web3-storage/parse-link-header" "^3.1.0"
     browser-readablestream-to-it "^1.0.3"
     carbites "^1.0.6"
-    cborg "^1.6.0"
-    files-from-path "^0.2.3"
-    ipfs-car "^0.6.2"
+    cborg "^1.8.0"
+    files-from-path "^0.2.4"
+    ipfs-car "^0.7.0"
     ipns "^0.16.0"
     libp2p-crypto "^0.21.0"
     p-retry "^4.5.0"
-    streaming-iterables "^6.0.0"
+    streaming-iterables "^6.2.0"
+    throttled-queue "^2.1.2"
     uint8arrays "^3.0.0"
 
 webidl-conversions@^3.0.0:

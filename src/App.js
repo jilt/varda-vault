@@ -54,18 +54,32 @@ export default function App() {
   //set web3.storage API token
   
   const web3Token = process.env.WEB3TOKEN
+  const relay = process.env.RELAY
 
  // add unlockable
  
-	const addUnlock = (lockable) => {
-		straw.push(lockable)
+	const addUnlock = async (lockable) => {
+		const res = await fetch(relay, {
+			method: 'POST',
+			headers: {
+				'Content-type': 'application/json'
+			},
+			body:JSON.stringify(lockable)
+		})
+		
+		const data = res.json()
+		
+		setDb([...straw, data])
+		
+		//straw.push(lockable)
 		const blob = new Blob([JSON.stringify(straw)], {type : 'application/json'})
 	
 		const files = [
-		new File( [blob], 'root.json')
+		new File( [blob], 'db.json')
 		]
-		const client = makeStorageClient()
-		return client.put(files)
+		console.log(straw)
+	//	const client = makeStorageClient()
+	//	return client.put(files)
 	
 	}
 
@@ -158,7 +172,20 @@ export default function App() {
 			getDb()
 	
 		}
-		listUploads()
+		
+		const listDbUploads = async () => {
+			const fetchUploads = await fetch(relay)
+			const data = await fetchUploads.json()
+			const stdatastr = JSON.stringify(data)
+			const straw = JSON.parse(stdatastr)
+			setDb(straw)
+			console.log(straw)
+			return straw
+			
+
+		}
+		listDbUploads()
+		// listUploads()
 		
       }
     },
@@ -222,7 +249,7 @@ export default function App() {
    const fetchOwned = async () => {
 //	   define owner using wallet
 	const owner = `${window.accountId}`.replace("testnet", "near");
-	const preres = await fetch ("https://api.thegraph.com/subgraphs/name/aluhning/parasv3", {
+	const preres = await fetch ("https://api.thegraph.com/subgraphs/name/jilt/parasubgraph", {
 		method: "POST",
 		headers: { "content-type": "application/json" },
 		body: JSON.stringify({
@@ -240,7 +267,7 @@ export default function App() {
     const fetchOwned1 = async () => {
 //	   define owner using wallet
 	const owner = `${window.accountId}`.replace("testnet", "near");
-	const preres1 = await fetch ("https://api.thegraph.com/subgraphs/name/aluhning/parasv3", {
+	const preres1 = await fetch ("https://api.thegraph.com/subgraphs/name/jilt/parasubgraph", {
 		method: "POST",
 		headers: { "content-type": "application/json" },
 		body: JSON.stringify({
@@ -258,7 +285,7 @@ export default function App() {
    const fetchGifted = async () => {
 //	   define owner using wallet
 	const owner = `${window.accountId}`.replace("testnet", "near");
-	const pregres = await fetch ("https://api.thegraph.com/subgraphs/name/aluhning/parasv3", {
+	const pregres = await fetch ("https://api.thegraph.com/subgraphs/name/jilt/parasubgraph", {
 		method: "POST",
 		headers: { "content-type": "application/json" },
 		body: JSON.stringify({
@@ -276,9 +303,9 @@ export default function App() {
 	
 	// Create default storage client
   
-	function makeStorageClient() {
-		return new Web3Storage({ token: web3Token })
-	}
+	//function makeStorageClient() {
+	//	return new Web3Storage({ token: web3Token })
+	//}
 
 
 
@@ -413,7 +440,5 @@ export default function App() {
       </div>
     </>
   );
-  
-	listUploads()
 }
 
