@@ -20,7 +20,7 @@ const Storage = ({ straw, locknftId, onAdd }) => {
 	// delete unlockable
 	
 	 const deleteUnlock = async (id) => {
-		await fetch(`https://Varda-vault-relay-server.jilt1.repl.co/locked/${locknftId}`, {
+		await fetch(`https://web3storage-Varda-relay.jilt1.repl.co/locked/${locknftId}`, {
 			method: 'DELETE',
 		})
 		var delUnlock = [... straw];
