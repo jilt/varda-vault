@@ -1,5 +1,5 @@
 {
-  "name": "Varda Vault",
+  "name": "Varda-Vault",
   "version": "1.0.0",
   "license": "(MIT)",
   "scripts": {
@@ -29,3 +29,4 @@
     "near-api-js": "^0.44.2"
   }
 }
+

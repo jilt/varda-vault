@@ -1,10 +1,6 @@
 {
   "ExpandedNodes": [
-    "",
-    "\\contract\\build\\release",
-    "\\src\\wallet",
-    "\\src\\wallet\\login"
+    ""
   ],
-  "SelectedNode": "\\src",
   "PreviewInSolutionExplorer": false
 }
