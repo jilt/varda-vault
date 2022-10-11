@@ -1,26 +1,29 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 # Developer note: near.gitignore will be renamed to .gitignore upon project creation
 # dependencies
-/node_modules/*
-!/node_modules/web3.storage
+node_modules
 /.pnp
 .pnp.js
+.env
 
 # build
-/out
+**/out
+**/dist
+**/node_modules
+
+# keys
+/vault-2.0
+/.parcel-cache
+/frontend/.parcel-cache
 
 # testing
 /coverage
-/vault-2.0
-/.parcel-cache
 
 # production
-/build
+**/build
 
 # misc
 .DS_Store
-/*.env
-.env
 .env.local
 .env.development.local
 .env.test.local
@@ -30,5 +33,3 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-root.json
-db.json
