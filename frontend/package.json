@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "license": "(MIT)",
   "scripts": {
-    "start": "./start.sh",
+    "start": "parcel index.html --open",
     "build": "parcel build index.html --public-url ./"
   },
   "devDependencies": {
