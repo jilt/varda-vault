@@ -62,9 +62,8 @@ function signedInFlow() {
 	// define owner using wallet
 
   const owner = wallet.accountId;
-  const owner1 = "jilt.near";
-  // const relay = process.env.RELAY;
-  const relay = "https://Varda-vault-relay-server.jilt1.repl.co/locked";
+  const relay = process.env.RELAY;
+
 	// getting nfts
 	const preres = await fetch ("https://interop-mainnet.hasura.app/v1/graphql", {
 		method: "POST",
