@@ -2,9 +2,6 @@
   "name": "Varda Vault",
   "version": "1.0.0",
   "license": "(MIT)",
-  "engines": {
-    "node": "18.10.0",
-  },
   "scripts": {
     "start": "./start.sh",
     "build": "parcel build index.html --public-url ./"
