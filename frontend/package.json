@@ -15,6 +15,9 @@
     "process": "^0.11.10"
   },
   "dependencies": {
+	"near-cli": "^3.3.0",
+	"@popperjs/core": "^2.11.6",
+    "bootstrap": "^5.2.2",
 	"@parcel/transformer-sass": "^2.7.0",
     "env-cmd": "^10.1.0",
     "events": "^3.3.0",
