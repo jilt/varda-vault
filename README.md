@@ -1,5 +1,4 @@
 ## varda-vault secret content locker for NEAR nft
-==================
 
 
 This repo is built to connect all NEAR NFTs to unlockable content. The contract is quite simple. It returns all the owned NFTs along with unlockable content related to them. The interface allows to lock new content to the owned NFTs.
