@@ -3,8 +3,8 @@
   "version": "1.1.0",
   "license": "(MIT)",
   "scripts": {
-    "start": "cd frontend && yarn start",
-    "deploy": "cd contract && npm run deploy",
+    "start": "cd /frontend && yarn start",
+    "deploy": "cd /contract && npm run deploy",
     "build": "npm run build:contract && npm run build:web",
     "build:web": "cd frontend && npm run build",
     "build:contract": "cd contract && npm run build",
