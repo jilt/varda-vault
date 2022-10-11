@@ -39,6 +39,10 @@ html {
   padding-left: .5rem;
 }
 
+.py-5 > .display-5 {
+  padding-top: 3.5em;
+}
+
 .hide {
   display: none;
 }

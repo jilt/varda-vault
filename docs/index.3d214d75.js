@@ -51062,8 +51062,8 @@ var _core = require("@near-wallet-selector/core");
 var _hwTransportWebhid = require("@ledgerhq/hw-transport-webhid");
 var _hwTransportWebhidDefault = parcelHelpers.interopDefault(_hwTransportWebhid);
 var _nearApiJs = require("near-api-js");
-var global = arguments[3];
 var Buffer = require("buffer").Buffer;
+var global = arguments[3];
 /******************************************************************************
 Copyright (c) Microsoft Corporation.
 
@@ -70270,8 +70270,8 @@ parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "setupSender", ()=>setupSender);
 var _isMobile = require("is-mobile");
 var _core = require("@near-wallet-selector/core");
-var Buffer = require("buffer").Buffer;
 var global = arguments[3];
+var Buffer = require("buffer").Buffer;
 var commonjsGlobal = typeof globalThis !== "undefined" ? globalThis : typeof window !== "undefined" ? window : typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : {};
 var fails$k = function(exec) {
     try {
@@ -78952,6 +78952,6 @@ var createPopper = /*#__PURE__*/ (0, _createPopperJs.popperGenerator)({
     defaultModifiers: defaultModifiers
 }); // eslint-disable-next-line import/no-unused-modules
 
-},{"./createPopper.js":"kp2OO","./modifiers/eventListeners.js":"a4e2M","./modifiers/popperOffsets.js":"9ie0Y","./modifiers/computeStyles.js":"bYJem","./modifiers/applyStyles.js":"lHAPN","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}]},["awEvQ","bB7Pu"], "bB7Pu", "parcelRequire0f07")
+},{"./createPopper.js":"kp2OO","./modifiers/eventListeners.js":"a4e2M","./modifiers/popperOffsets.js":"9ie0Y","./modifiers/computeStyles.js":"bYJem","./modifiers/applyStyles.js":"lHAPN","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}]},["awEvQ","bB7Pu"], "bB7Pu", "parcelRequire4603")
 
 //# sourceMappingURL=index.3d214d75.js.map
